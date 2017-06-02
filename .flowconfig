@@ -1,0 +1,11 @@
+[ignore]
+/build/
+
+[include]
+
+[libs]
+
+[options]
+
+[version]
+^0.47.0

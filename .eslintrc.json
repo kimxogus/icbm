@@ -1,0 +1,28 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "plugins": [
+    "flowtype"
+  ],
+  "extends": [
+    "plugin:flowtype/recommended"
+  ],
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": false
+    }
+  },
+  "rules": {
+    "no-shadow": "error",
+    "no-unused-vars": "warn",
+    "eqeqeq": ["error", "smart"],
+    "flowtype/no-types-missing-file-annotation": "off"
+  }
+}
