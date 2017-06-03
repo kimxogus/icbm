@@ -40,15 +40,19 @@ export default (file: string, option: ?object): responseType => {
     case 'bash_profile':
       srcPath = defaultTo(option.path, path.join(homePath, '.bash_profile'));
       break;
+
     case 'bashrc':
       srcPath = defaultTo(option.path, path.join(homePath, '.bashrc'));
       break;
+
     case 'vimrc':
       srcPath = defaultTo(option.path, path.join(homePath, '.vimrc'));
       break;
+
     case 'gitconfig':
       srcPath = defaultTo(option.path, path.join(homePath, '.gitconfig'));
       break;
+
     default:
       if (!option.path) return unsupported;
       srcPath = option.path;
