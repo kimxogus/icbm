@@ -1,5 +1,4 @@
 import { get, set } from './file';
-import * as configType from './type';
-import * as validate from './validate';
+import * as keys from './keys';
 
-export { set, get, configType, validate };
+export { set, get, keys };

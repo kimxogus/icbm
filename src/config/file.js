@@ -6,33 +6,38 @@ import rc from 'rc';
 import stringify from 'json-stable-stringify';
 import { get as lodashGet, omit } from 'lodash';
 
-import { anyConfig } from './type';
-import { anyConfig } from './type';
+import { validate } from './keys';
 import { getEnvVar } from '../util';
 
 const appName: string = 'xo';
 const configDir: string = path.join(getEnvVar('HOME'), `.${appName}`);
 const configPath: string = path.join(configDir, 'config');
 
-export const get = (key: ?string): string | anyConfig => {
+export const get = (key: ?string): string | object => {
   const config = omit(rc(appName), ['_', 'config', 'configs']) || {};
 
   return key ? lodashGet(config, key) : config;
 };
 
-export const set = (config: anyConfig): Promise<anyConfig> => {
+export const set = (key: string, value: string | number): object => {
   mkdirpSync(configDir);
 
-  const existingConfig: anyConfig = fs.existsSync(configPath)
+  const existingConfig: object = fs.existsSync(configPath)
     ? JSON.parse(fs.readFileSync(configPath))
     : {};
 
-  const newConfig: anyConfig = {
+  if (!validate(key, value))
+    throw new Error(
+      `Invalid key value pair { '${key}' : ${value} }`,
+      'Validation Error'
+    );
+
+  const newConfig: object = {
     ...existingConfig,
-    ...config,
+    ...{ [key]: value },
   };
 
   fs.writeFileSync(configPath, stringify(newConfig, { space: '  ' }));
 
-  return Promise.resolve(newConfig);
+  return newConfig;
 };

@@ -1,6 +1,6 @@
+import * as file from '../file';
 import { existsSync } from 'fs';
 import remove from 'remove';
-import * as file from '../file';
 
 const configDir = './.xo';
 
@@ -14,11 +14,29 @@ test('get nothing', () => {
 });
 
 test('set and get repository type', () => {
-  file.set({ repository: { type: 'git' } }).then(newConfig => {
-    expect(newConfig).toHaveProperty('repository');
-    expect(newConfig.repository).toHaveProperty('type');
-    expect(newConfig.repository.type).toBe('git');
+  const key = 'repository.type';
+  const value = 'gist';
 
-    expect(file.get('repository.type')).toBe('git');
+  const newConfig = file.set(key, value);
+  expect(newConfig).toMatchObject({
+    [key]: value,
   });
+
+  expect(newConfig[key]).toBe(value);
+
+  expect(file.get(key)).toBe(value);
+});
+
+test('set and get repository url', () => {
+  const key = 'repository.url';
+  const value = 'https://github.com/kimxogus/xo.git';
+
+  const newConfig = file.set(key, value);
+  expect(newConfig).toMatchObject({
+    [key]: value,
+  });
+
+  expect(newConfig[key]).toBe(value);
+
+  expect(file.get(key)).toBe(value);
 });
