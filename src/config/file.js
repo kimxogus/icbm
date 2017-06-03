@@ -1,5 +1,4 @@
 import * as fs from 'fs';
-import path from 'path';
 
 import { sync as mkdirpSync } from 'mkdirp';
 import rc from 'rc';
@@ -7,11 +6,7 @@ import stringify from 'json-stable-stringify';
 import { get as lodashGet, omit } from 'lodash';
 
 import { validate } from './keys';
-import { getEnvVar } from '../util';
-
-const appName: string = 'xo';
-const configDir: string = path.join(getEnvVar('HOME'), `.${appName}`);
-const configPath: string = path.join(configDir, 'config');
+import { appName, dir, configFile } from '../paths';
 
 export const get = (key: ?string): string | object => {
   const config = omit(rc(appName), ['_', 'config', 'configs']) || {};
@@ -20,10 +15,10 @@ export const get = (key: ?string): string | object => {
 };
 
 export const set = (key: string, value: string | number): object => {
-  mkdirpSync(configDir);
+  mkdirpSync(dir);
 
-  const existingConfig: object = fs.existsSync(configPath)
-    ? JSON.parse(fs.readFileSync(configPath))
+  const existingConfig: object = fs.existsSync(configFile)
+    ? JSON.parse(fs.readFileSync(configFile))
     : {};
 
   if (!validate(key, value))
@@ -37,7 +32,7 @@ export const set = (key: string, value: string | number): object => {
     ...{ [key]: value },
   };
 
-  fs.writeFileSync(configPath, stringify(newConfig, { space: '  ' }));
+  fs.writeFileSync(configFile, stringify(newConfig, { space: '  ' }));
 
   return newConfig;
 };
