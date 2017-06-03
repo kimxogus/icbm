@@ -21,9 +21,11 @@
     "prelint": "npm run prettify",
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "node scripts/test",
-    "prebuild": "npm run lint && node scripts/clearBuild.js",
-    "build": "babel src -d build --ignore **/__tests__/*"
+    "test": "babel-node scripts/test",
+    "prebuild": "npm run lint && babel-node scripts/clearBuild.js",
+    "build": "npm run build:prod",
+    "build:prod": "babel src -d build",
+    "postinstall": "postinstall-build lib --script build:prod"
   },
   "pre-commit": [
     "prettify"
@@ -50,6 +52,7 @@
     "json-stable-stringify": "^1.0.1",
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
+    "postinstall-build": "^5.0.0",
     "rc": "^1.2.1"
   },
   "jest": {

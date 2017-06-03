@@ -1,13 +1,13 @@
-var path = require('path');
+import dotenv from 'dotenv';
 
 process.env.HOME = process.env.PWD;
 
-require('dotenv').config({
-  path: path.join(__dirname, '.env.test'),
+dotenv.config({
+  path: '.env.test',
   silent: true,
 });
 
-var argv = process.argv.slice(2);
+const argv = process.argv.slice(2);
 
 if (!process.env.CI && argv.indexOf('--coverage') < 0) {
   argv.push('--watch');

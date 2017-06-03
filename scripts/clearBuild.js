@@ -1,7 +1,7 @@
-var fs = require('fs');
-var remove = require('remove');
-var paths = './paths';
+import { existsSync } from 'fs';
+import remove from 'remove';
+import { build } from './paths';
 
-if (fs.existsSync(paths.build)) {
-  remove.removeSync(paths.build);
+if (existsSync(build)) {
+  remove.removeSync(build);
 }

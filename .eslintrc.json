@@ -21,7 +21,6 @@
   },
   "rules": {
     "no-shadow": "error",
-    "no-unused-vars": "warn",
     "eqeqeq": ["error", "smart"],
     "flowtype/no-types-missing-file-annotation": "off"
   }
