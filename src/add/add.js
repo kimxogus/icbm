@@ -25,16 +25,16 @@ export const response = {
   unsupported,
 };
 
-const addAction = (name: string, srcPach: string): responseType => {
-  ensureFileSync(srcPach);
-  const stat = fs.lstatSync(srcPach);
+const addAction = (name: string, srcPath: string): responseType => {
+  ensureFileSync(srcPath);
+  const stat = fs.lstatSync(srcPath);
   if (stat.isSymbolicLink()) {
     return alreadyAdded;
   }
   const addedFilePath = path.join(fileDir, name);
-  copySync(srcPach, addedFilePath);
-  removeSync(srcPach);
-  ensureSymlinkSync(addedFilePath, srcPach);
+  copySync(srcPath, addedFilePath);
+  removeSync(srcPath);
+  ensureSymlinkSync(addedFilePath, srcPath);
   return success;
 };
 
