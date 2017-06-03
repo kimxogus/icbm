@@ -1,3 +1,3 @@
-import add, { response } from './add';
+import add, { response, responseType } from './add';
 
-export { add, response };
+export { add, response, responseType };

@@ -7,7 +7,7 @@ import {
   ensureSymlinkSync,
   removeSync,
 } from 'fs-extra';
-import { defaultTo } from 'lodash';
+import { defaultTo, defaults } from 'lodash';
 import getEnvVar from '../util/getEnvVar';
 import { fileDir } from '../paths';
 
@@ -38,17 +38,21 @@ const addAction = (name: string, srcPach: string): responseType => {
   return success;
 };
 
-export default (file: string, filePath: ?string): responseType => {
+export default (file: string, option: ?object): responseType => {
   mkdirpSync(fileDir);
+
+  option = defaults(option, {
+    path: null,
+  });
 
   let srcPath = null;
   const homePath = getEnvVar('HOME');
   switch (file) {
     case 'bash_profile':
-      srcPath = defaultTo(filePath, path.join(homePath, '.bash_profile'));
+      srcPath = defaultTo(option.path, path.join(homePath, '.bash_profile'));
       break;
     case 'bashrc':
-      srcPath = defaultTo(filePath, path.join(homePath, '.bashrc'));
+      srcPath = defaultTo(option.path, path.join(homePath, '.bashrc'));
       break;
     default:
       return unsupported;

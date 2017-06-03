@@ -9,7 +9,14 @@ program.version(packageJson.version);
 // Commands
 program.command('config <type> [key] [value]').action(config);
 
-program.command('add <file>').action(add);
+program
+  .command('add <file>]')
+  .option('--path', 'path of the file')
+  .action(file => {
+    add(file, {
+      path: program.path,
+    });
+  });
 
 // Parse and execute
 program.parse(process.argv);
