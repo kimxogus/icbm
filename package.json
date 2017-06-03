@@ -24,7 +24,7 @@
     "test": "babel-node scripts/test",
     "prebuild": "npm run lint && babel-node scripts/clearBuild.js",
     "build": "npm run build:prod",
-    "build:prod": "babel src -d build",
+    "build:prod": "babel src -d build --ignore **/__tests__/*",
     "postinstall": "postinstall-build lib --script build:prod"
   },
   "pre-commit": [

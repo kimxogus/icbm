@@ -1,4 +1,3 @@
 {
-  "presets": ["es2015", "flow", "stage-0"],
-  "ignore": ["**/__tests__/*"]
+  "presets": ["es2015", "flow", "stage-0"]
 }
