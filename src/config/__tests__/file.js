@@ -1,12 +1,11 @@
 import * as file from '../file';
 import { existsSync } from 'fs';
 import remove from 'remove';
-
-const configDir = './.xo';
+import { dir } from '../../paths';
 
 // Clear before tests
-if (existsSync(configDir)) {
-  remove.removeSync(configDir);
+if (existsSync(dir)) {
+  remove.removeSync(dir);
 }
 
 test('get nothing', () => {

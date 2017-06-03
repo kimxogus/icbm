@@ -6,3 +6,5 @@ export const appName: string = 'xo';
 export const dir: string = path.join(getEnvVar('HOME'), `.${appName}`);
 
 export const configFile: string = path.join(dir, 'config');
+
+export const fileDir: string = path.join(dir, 'file');

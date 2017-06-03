@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
+import path from 'path';
 
-process.env.HOME = process.env.PWD;
+process.env.HOME = path.join(process.env.PWD, 'testHome');
 
 dotenv.config({
   path: '.env.test',
