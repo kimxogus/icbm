@@ -3,9 +3,6 @@ machine:
   timezone:
     Asia/Seoul
 
-  node:
-    version: 7.10.0
-
   environment:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 
@@ -16,6 +13,6 @@ dependencies:
     - ~/.cache/yarn
 test:
   override:
-    - nvm use 4.8 && yarn test
-    - nvm use 6.10 && yarn test
-    - nvm use 7.10.0 && yarn test
+    - nvm install 4.8.3 && nvm use 4.8.3 && yarn test
+    - nvm install 6.10.3 && nvm use 6.10.3 && yarn test
+    - nvm install 7.10.0 && nvm use 7.10.0 && yarn test
