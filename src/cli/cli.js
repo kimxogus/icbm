@@ -10,7 +10,7 @@ program.version(packageJson.version);
 program.command('config <type> [key] [value]').action(config);
 
 program
-  .command('add <file>]')
+  .command('add <file>')
   .option('--path', 'path of the file')
   .action(file => {
     add(file, {
