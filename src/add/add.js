@@ -8,8 +8,10 @@ import {
   removeSync,
 } from 'fs-extra';
 import { defaultTo, defaults } from 'lodash';
+
 import getEnvVar from '../util/getEnvVar';
 import { fileDir } from '../paths';
+import * as config from '../config';
 
 const alreadyAdded: string = 'alreadyAdded';
 const success: string = 'success';
@@ -23,19 +25,6 @@ export const response = {
   success,
   fail,
   unsupported,
-};
-
-const addAction = (name: string, srcPath: string): responseType => {
-  ensureFileSync(srcPath);
-  const stat = fs.lstatSync(srcPath);
-  if (stat.isSymbolicLink()) {
-    return alreadyAdded;
-  }
-  const addedFilePath = path.join(fileDir, name);
-  copySync(srcPath, addedFilePath);
-  removeSync(srcPath);
-  ensureSymlinkSync(addedFilePath, srcPath);
-  return success;
 };
 
 export default (file: string, option: ?object): responseType => {
@@ -54,8 +43,35 @@ export default (file: string, option: ?object): responseType => {
     case 'bashrc':
       srcPath = defaultTo(option.path, path.join(homePath, '.bashrc'));
       break;
+    case 'vimrc':
+      srcPath = defaultTo(option.path, path.join(homePath, '.vimrc'));
+      break;
+    case 'gitconfig':
+      srcPath = defaultTo(option.path, path.join(homePath, '.gitconfig'));
+      break;
     default:
-      return unsupported;
+      if (!option.path) return unsupported;
+      srcPath = option.path;
   }
-  return addAction(file, srcPath);
+
+  if (!srcPath) return fail;
+
+  ensureFileSync(srcPath);
+
+  if (fs.lstatSync(srcPath).isSymbolicLink()) {
+    return alreadyAdded;
+  }
+
+  const addedFilePath = path.join(fileDir, `.${file}`);
+
+  // replace original file with symlink
+  copySync(srcPath, addedFilePath);
+  copySync(srcPath, `${srcPath}.bak`);
+  removeSync(srcPath);
+  ensureSymlinkSync(addedFilePath, srcPath);
+
+  // add config
+  config.set(`path.${file}`, srcPath);
+
+  return success;
 };

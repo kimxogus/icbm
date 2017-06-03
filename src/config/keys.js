@@ -1,4 +1,4 @@
-import { isNil, has } from 'lodash';
+import { isNil, has, startsWith } from 'lodash';
 
 const keyMap = {
   'repository.type': /(github|gist)/,
@@ -13,6 +13,8 @@ keys.forEach(key => {
 });
 
 export const validate = (key: string, value: ?(string | number)): boolean => {
+  if (key.match(/path\.*/)) return true;
+
   if (!has(keyMap, key)) return false;
 
   if (isNil(value)) return true;
