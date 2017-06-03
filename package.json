@@ -18,12 +18,12 @@
   },
   "scripts": {
     "prettify": "prettier --write --single-quote --tab-width 2 --trailing-comma es5 \"{src/**/*.js,scripts/**/*.js,bin/**/*.js}\"",
-    "prelint": "yarn prettify",
+    "prelint": "npm run prettify",
     "lint": "eslint .",
-    "pretest": "yarn lint",
+    "pretest": "npm run lint",
     "test": "node scripts/test",
-    "prebuild": "yarn lint && node scripts/clearBuild.js",
-    "build": "babel src -d build"
+    "prebuild": "npm run lint && node scripts/clearBuild.js",
+    "build": "babel src -d build --ignore **/__tests__/*"
   },
   "pre-commit": [
     "prettify"
