@@ -2,7 +2,7 @@ import { set, isNil } from 'lodash';
 import print from './print';
 import * as config from '../config';
 
-export default (type: string, key: string, value: string | number) => {
+export default (type: string, key: ?string, value: ?(string | number)) => {
   switch (type) {
     case 'get':
       if (isNil(key)) {
