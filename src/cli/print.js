@@ -1,22 +1,16 @@
 import chalk from 'chalk';
 import stringify from 'json-stable-stringify';
-import { get, isPlainObject } from 'lodash';
+import { get, isNil } from 'lodash';
 
-const printConfigPair = (configuration, key: string, path: string) =>
-  console.log(`${path || key} = ${stringify(get(configuration, key))}`);
+const printConfigPair = (config: object, key: ?string) =>
+  console.log(`${key} = ${stringify(get(config, key))}`);
 
-const printConfigObject = (configuration, keys = []) =>
-  Object.keys(configuration).forEach(k => {
-    const childKeys = [...keys, k];
-    isPlainObject(configuration[k])
-      ? printConfigObject(configuration[k], childKeys)
-      : printConfigPair(configuration, k, childKeys.join('.'));
-  });
+const printConfigObject = (config: object) =>
+  Object.keys(config).forEach(k => printConfigPair(config, k));
 
 const print = {
-  configObject: config =>
-    Object.keys(config).length ? printConfigObject : console.log(config),
-  configPair: printConfigPair,
+  config: (config: object, key: ?string) =>
+    isNil(key) ? printConfigObject(config) : printConfigPair(config, key),
   error: (type, message) =>
     console.error(chalk.red(`ERROR: ${type} - ${message}`)),
 };
