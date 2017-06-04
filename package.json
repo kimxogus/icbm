@@ -24,7 +24,7 @@
     "test": "babel-node scripts/test",
     "prebuild": "npm run lint && babel-node scripts/clearBuild.js",
     "build": "npm run build:prod",
-    "build:prod": "babel src -d build --ignore **/__tests__/*",
+    "build:prod": "cross-env NODE_EMV=production babel src -d build --ignore **/__tests__/*",
     "postinstall": "postinstall-build lib --script build:prod"
   },
   "pre-commit": [
@@ -37,6 +37,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.0.0",
     "dotenv": "^4.0.0",
     "eslint": "^3.19.0",
     "eslint-plugin-flowtype": "^2.34.0",
