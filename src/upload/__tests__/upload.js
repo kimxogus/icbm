@@ -1,5 +1,5 @@
 import upload from '../upload';
-import { set as setConfig } from '../../config';
+import { set as setConfig, get } from '../../config';
 import getEnvVar from '../../util/getEnvVar';
 
 test('upload success with gist', () => {

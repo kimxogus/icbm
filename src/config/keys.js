@@ -2,7 +2,7 @@ import { isNil, has, startsWith } from 'lodash';
 
 const keyMap = {
   'repository.type': /(gist)/,
-  'repository.url': /[\w\W]*/,
+  'repository.gist': /[\W]*/,
   'repository.githubToken': /[\w\W]*/,
 };
 
