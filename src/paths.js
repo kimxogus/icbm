@@ -10,5 +10,3 @@ const home: string = process.env.NODE_EMV === 'production'
 export const dir: string = path.join(home, `.${appName}`);
 
 export const configFile: string = path.join(dir, 'config');
-
-export const fileDir: string = path.join(dir, 'file');

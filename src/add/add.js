@@ -10,7 +10,7 @@ import {
 import { defaultTo, defaults } from 'lodash';
 
 import getEnvVar from '../util/getEnvVar';
-import { fileDir } from '../paths';
+import { dir } from '../paths';
 import * as config from '../config';
 
 const alreadyAdded: string = 'alreadyAdded';
@@ -28,7 +28,7 @@ export const response = {
 };
 
 export default (file: string, option: ?object): responseType => {
-  mkdirpSync(fileDir);
+  mkdirpSync(dir);
 
   option = defaults(option, {
     path: null,
@@ -37,6 +37,9 @@ export default (file: string, option: ?object): responseType => {
   let srcPath = null;
   const homePath = getEnvVar('HOME');
   switch (file) {
+    case 'config':
+      return unsupported;
+
     case 'bash_profile':
       srcPath = defaultTo(option.path, path.join(homePath, '.bash_profile'));
       break;
@@ -66,7 +69,7 @@ export default (file: string, option: ?object): responseType => {
     return alreadyAdded;
   }
 
-  const addedFilePath = path.join(fileDir, `.${file}`);
+  const addedFilePath = path.join(dir, `.${file}`);
 
   // replace original file with symlink
   copySync(srcPath, addedFilePath);
