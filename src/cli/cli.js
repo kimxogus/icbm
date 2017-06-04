@@ -10,12 +10,14 @@ program.version(packageJson.version);
 program.command('config <type> [key] [value]').action(config);
 
 program
-  .command('add <file>')
+  .command('add <file...>')
   .option('--path', 'path of the file')
-  .action(file => {
-    add(file, {
-      path: program.path,
-    });
+  .action(files => {
+    files.forEach(file =>
+      add(file, {
+        path: program.path,
+      })
+    );
   });
 
 // Parse and execute
