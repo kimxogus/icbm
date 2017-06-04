@@ -21,7 +21,10 @@
   },
   "rules": {
     "no-shadow": "error",
-    "eqeqeq": ["error", "smart"],
+    "eqeqeq": [
+      "error",
+      "smart"
+    ],
     "flowtype/no-types-missing-file-annotation": "off"
   }
 }
