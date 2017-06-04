@@ -17,8 +17,6 @@ const linkFiles = (): response => {
       const file = key.substr(5);
       const filePath = config[key];
 
-      console.log(file, filePath);
-
       if (fs.existsSync(filePath) && !fs.statSync(filePath).isSymbolicLink()) {
         copySync(filePath, `${filePath}.bak`);
         removeSync(filePath);
