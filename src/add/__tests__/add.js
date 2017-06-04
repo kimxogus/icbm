@@ -1,11 +1,11 @@
 import path from 'path';
 import { existsSync } from 'fs';
 import remove from 'remove';
-import { dir } from '../../paths';
+import { appDir } from '../../paths';
 
 // Clear before tests
-if (existsSync(path.join(dir, '..'))) {
-  remove.removeSync(path.join(dir, '..'));
+if (existsSync(path.join(appDir, '..'))) {
+  remove.removeSync(path.join(appDir, '..'));
 }
 
 import add, { response } from '../add';

@@ -6,7 +6,7 @@ import stringify from 'json-stable-stringify';
 import { get as lodashGet, omit } from 'lodash';
 
 import { validate } from './keys';
-import { appName, dir, configFile } from '../paths';
+import { appName, appDir, configFile } from '../paths';
 
 export const get = (key: ?string): string | object => {
   const config = omit(rc(appName), ['_', 'config', 'configs']) || {};
@@ -15,7 +15,7 @@ export const get = (key: ?string): string | object => {
 };
 
 export const set = (key: string, value: string | number): object => {
-  mkdirpSync(dir);
+  mkdirpSync(appDir);
 
   const existingConfig: object = fs.existsSync(configFile)
     ? JSON.parse(fs.readFileSync(configFile))

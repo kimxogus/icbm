@@ -10,7 +10,7 @@ import {
 import { defaultTo, defaults } from 'lodash';
 
 import getEnvVar from '../util/getEnvVar';
-import { dir } from '../paths';
+import { appDir } from '../paths';
 import * as config from '../config';
 
 const alreadyAdded: string = 'alreadyAdded';
@@ -28,7 +28,7 @@ export const response = {
 };
 
 export default (file: string, option: ?object): responseType => {
-  mkdirpSync(dir);
+  mkdirpSync(appDir);
 
   option = defaults(option, {
     path: null,
@@ -69,7 +69,7 @@ export default (file: string, option: ?object): responseType => {
     return alreadyAdded;
   }
 
-  const addedFilePath = path.join(dir, `.${file}`);
+  const addedFilePath = path.join(appDir, `.${file}`);
 
   // replace original file with symlink
   copySync(srcPath, addedFilePath);

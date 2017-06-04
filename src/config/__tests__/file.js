@@ -9,7 +9,7 @@ if (existsSync(dir)) {
 }
 
 test('get nothing', () => {
-  expect(file.get()).toEqual({});
+  expect(file.get()).toMatchObject({});
 });
 
 test('set and get repository type', () => {
