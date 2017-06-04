@@ -72,8 +72,8 @@ export default (file: string, option: ?object): responseType => {
   const addedFilePath = path.join(appDir, `.${file}`);
 
   // replace original file with symlink
-  copySync(srcPath, addedFilePath);
   copySync(srcPath, `${srcPath}.bak`);
+  copySync(srcPath, addedFilePath);
   removeSync(srcPath);
   ensureSymlinkSync(addedFilePath, srcPath);
 
