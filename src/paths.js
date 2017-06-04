@@ -3,9 +3,9 @@ import getEnvVar from './util/getEnvVar';
 
 export const appName: string = 'xo';
 
-const home: string = process.env.NODE_EMV === 'production'
-  ? getEnvVar('HOME')
-  : path.join(getEnvVar('PWD'), 'testHome');
+const home: string = process.env.CI || process.env.NODE_EMV === 'test'
+  ? path.join(getEnvVar('PWD'), 'testHome')
+  : getEnvVar('HOME');
 
 export const appDir: string = path.join(home, `.${appName}`);
 
