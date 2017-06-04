@@ -1,13 +1,15 @@
+import fs from 'fs';
 import dotenv from 'dotenv';
 import path from 'path';
 
 process.env.NODE_ENV = 'test';
 process.env.HOME = path.join(process.env.PWD, 'testHome');
 
-dotenv.config({
-  path: '.env.test',
-  silent: true,
-});
+if (fs.existsSync('.env.test'))
+  dotenv.config({
+    path: '.env.test',
+    silent: true,
+  });
 
 const argv = process.argv.slice(2);
 
