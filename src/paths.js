@@ -1,7 +1,7 @@
 import path from 'path';
 import getEnvVar from './util/getEnvVar';
 
-export const appName: string = 'xo';
+export const appName: string = 'xus';
 
 const home: string = getEnvVar('CI') || getEnvVar('NODE_ENV') === 'test'
   ? path.join(getEnvVar('PWD'), 'testHome')

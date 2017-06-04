@@ -5,7 +5,7 @@ import getEnvVar from '../util/getEnvVar';
 const github = new Github({
   debug: getEnvVar('NODE_ENV') !== 'production',
   headers: {
-    'user-agent': 'xo',
+    'user-agent': 'xus',
   },
 });
 
@@ -16,7 +16,7 @@ export const authenticate = () => {
 
   if (!token)
     throw new Error(
-      `Set github token using 'xo config set repository.githubToken <token>'`
+      `Set github token using 'xus config set repository.githubToken <token>'`
     );
 
   github.authenticate({ type: 'oauth', token });

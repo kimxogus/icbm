@@ -37,7 +37,7 @@ export default (): response => {
 
   if (!repoType)
     throw new Error(
-      `Specify the repository type using 'xo config set <key> <value>'`
+      `Specify the repository type using 'xus config set <key> <value>'`
     );
 
   switch (repoType) {

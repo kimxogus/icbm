@@ -15,7 +15,7 @@ export const get = (): Promise<object> => {
 
   if (!id || !id.length)
     return Promise.reject({
-      message: `Specify gist id with 'xo config set repository.gist <gist id>'`,
+      message: `Specify gist id with 'xus config set repository.gist <gist id>'`,
       id: `Gist not specified`,
     });
 

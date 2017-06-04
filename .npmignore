@@ -3,6 +3,5 @@ node_modules
 .idea
 .vscode
 build
-.xo
 /testHome
 /.env*
