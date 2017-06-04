@@ -12,13 +12,12 @@ export const create = (option: object): Promise<object> => {
 
 export const get = (): Promise<object> => {
   const id = getConfig('repository.gist');
+
   if (!id || !id.length)
     return Promise.reject({
       message: `Specify gist id with 'xo config set repository.gist <gist id>'`,
       id: `Gist not specified`,
     });
-
-  authenticate();
 
   return github.gists.get({ id });
 };

@@ -2,6 +2,7 @@ import program from 'commander';
 import config from './config';
 import add from './add';
 import upload from './upload';
+import download from './download';
 import version from '../version';
 
 // Version
@@ -21,6 +22,10 @@ program
 
 program.command('upload').action(() => {
   upload();
+});
+
+program.command('download').action(() => {
+  download();
 });
 
 // Parse and execute

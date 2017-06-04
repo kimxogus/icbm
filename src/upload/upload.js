@@ -7,7 +7,7 @@ import { get as getConfig } from '../config';
 import * as gist from '../github/gist';
 import version from '../version';
 
-export default () => {
+export default (): Promise<?any> => {
   const repoType = getConfig('repository.type');
 
   if (!repoType)
