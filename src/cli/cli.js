@@ -1,10 +1,11 @@
 import program from 'commander';
-import packageJson from '../../package.json';
 import config from './config';
 import add from './add';
+import upload from './upload';
+import version from '../version';
 
 // Version
-program.version(packageJson.version);
+program.version(version);
 
 // Commands
 program.command('config <type> [key] [value]').action(config);
@@ -17,6 +18,10 @@ program
       path: program.path,
     });
   });
+
+program.command('upload').action(() => {
+  upload();
+});
 
 // Parse and execute
 program.parse(process.argv);

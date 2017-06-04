@@ -69,7 +69,7 @@ export default (file: string, option: ?object): responseType => {
     return alreadyAdded;
   }
 
-  const addedFilePath = path.join(appDir, `.${file}`);
+  const addedFilePath = path.join(appDir, file);
 
   // replace original file with symlink
   copySync(srcPath, `${srcPath}.bak`);

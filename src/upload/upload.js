@@ -1,23 +1,41 @@
-import { has } from 'lodash';
+import fs from 'fs';
+import path from 'path';
+import stringify from 'json-stable-stringify';
 
+import { appDir } from '../paths';
 import { get as getConfig } from '../config';
+import * as gist from '../github/gist';
+import version from '../version';
 
 export default () => {
-  const config = getConfig();
+  const repoType = getConfig('repository.type');
 
-  if (!has(config, 'repository.type'))
+  if (!repoType)
     throw new Error(
       `Specify the repository type using 'xo config set <key> <value>'`
     );
 
-  const repoType = config['repository.type'];
   switch (repoType) {
     case 'gist':
-      break;
+      const files = fs.readdirSync(appDir).reduce((filesObject, file) => {
+        filesObject[file] = {
+          content: fs.readFileSync(path.join(appDir, file), 'utf8'),
+        };
+        return filesObject;
+      }, {});
+
+      files.syncInfo = {
+        content: stringify({
+          version,
+          lastUpdated: new Date().toISOString(),
+        }),
+      };
+
+      return gist.edit(files);
     default:
-      throw new Error(
-        `${repoType} is not supported yet.`,
-        'Invalid repository type'
-      );
+      return Promise.reject({
+        message: `${repoType} is not supported yet.`,
+        id: 'Invalid repository type',
+      });
   }
 };

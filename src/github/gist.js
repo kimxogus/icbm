@@ -10,29 +10,24 @@ export const create = (option: object): Promise<object> => {
   });
 };
 
-export const getOrCreate = (id: ?string): Promise<object> => {
+export const get = (): Promise<object> => {
+  const id = getConfig('repository.gist');
+  if (!id || !id.length)
+    return Promise.reject({
+      message: `Specify gist id with 'xo config set repository.gist <gist id>'`,
+      id: `Gist not specified`,
+    });
+
   authenticate();
 
-  return id && id.length
-    ? github.gists.get({ id })
-    : create({
-        public: false,
-        files: {
-          empty: {
-            content: 'empty',
-          },
-        },
-        description: 'Gist for xo',
-      });
+  return github.gists.get({ id });
 };
 
 export const edit = (files: object): Promise<object> => {
   authenticate();
 
-  return getOrCreate(getConfig('repository.gist')).then(res =>
-    github.gists.edit({
-      id: res.data.id,
-      files,
-    })
-  );
+  return github.gists.edit({
+    id: getConfig('repository.gist'),
+    files,
+  });
 };
