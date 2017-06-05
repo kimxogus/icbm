@@ -1,8 +1,36 @@
+import { authenticate } from '../github/github';
+import { get } from '../github/gist';
 import { download } from '../download';
+import { get as getConfig, set as setConfig } from '../config';
 import print from './print';
 import leftPad from 'left-pad';
+import co from 'co';
+import prompt from 'co-prompt';
+import chalk from 'chalk';
 
 export default () => {
+  const gist = getConfig('repository.gist');
+
+  (gist && gist.length
+    ? get(gist).then(executeDownload)
+    : Promise.reject({ code: 404 })).catch(e => {
+    if (e && e.code === 404) {
+      co(function*() {
+        print.error('Gist id is not set.');
+        const gistId = yield prompt(
+          chalk.yellow('Gist id(Do not enter to create a new gist): ')
+        );
+        setConfig('repository.gist', gistId);
+        get(gistId)
+          .then(executeDownload)
+          .catch(({ message }) => print.error(`GIST ERROR`, message))
+          .then(() => process.stdin.pause());
+      });
+    }
+  });
+};
+
+const executeDownload = () =>
   download()
     .then(downloadedFiles => {
       print.info(`Downloaded files successfully.`);
@@ -15,4 +43,3 @@ export default () => {
     .catch(err => {
       print.error(`[ERROR] ${err}`);
     });
-};

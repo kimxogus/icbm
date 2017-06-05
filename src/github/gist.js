@@ -10,14 +10,10 @@ export const create = (option: object): Promise<object> => {
   });
 };
 
-export const get = (): Promise<object> => {
-  const id = getConfig('repository.gist');
+export const get = (id: ?string): Promise<object> => {
+  id = id || getConfig('repository.gist');
 
-  if (!id || !id.length)
-    return Promise.reject({
-      message: `Specify gist id with 'xus config set repository.gist <gist id>'`,
-      id: `Gist not specified`,
-    });
+  if (!id || !id.length) return Promise.reject('EMPTY');
 
   return github.gists.get({ id });
 };
