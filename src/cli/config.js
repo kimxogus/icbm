@@ -22,6 +22,9 @@ export default (type: string, key: ?string, value: ?(string | number)) => {
       }
       break;
     default:
-      print.error('Input error', `Invalid input '${arguments}'`);
+      print.error(
+        'Input type',
+        `Invalid type '${type}'. Only 'set' and 'get' is available`
+      );
   }
 };
