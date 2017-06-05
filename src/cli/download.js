@@ -11,11 +11,11 @@ import chalk from 'chalk';
 export default () => {
   const gist = getConfig('repository.gist');
 
-  const getGist = gist && gist.length
+  const getGistAndDownload = gist && gist.length
     ? get(gist).then(executeDownload)
     : Promise.reject({ code: 404 });
 
-  getGist.catch(e => {
+  getGistAndDownload.catch(e => {
     // Gist id is not set or invalid gist id
     if (e && e.code === 404) {
       co(function*() {
