@@ -11,20 +11,26 @@ import chalk from 'chalk';
 export default () => {
   const gist = getConfig('repository.gist');
 
-  (gist && gist.length
+  const getGist = gist && gist.length
     ? get(gist).then(executeDownload)
-    : Promise.reject({ code: 404 })).catch(e => {
+    : Promise.reject({ code: 404 });
+
+  getGist.catch(e => {
+    // Gist id is not set or invalid gist id
     if (e && e.code === 404) {
       co(function*() {
         print.error('Gist id is not set.');
         const gistId = yield prompt(
           chalk.yellow('Gist id(Do not enter to create a new gist): ')
         );
-        setConfig('repository.gist', gistId);
-        get(gistId)
-          .then(executeDownload)
-          .catch(({ message }) => print.error(`GIST ERROR`, message))
-          .then(() => process.stdin.pause());
+        if (gistId && gistId.length) {
+          setConfig('repository.gist', gistId);
+          get(gistId)
+            .then(executeDownload)
+            .catch(({ message }) => print.error(`GIST ERROR`, message))
+            .then(() => process.stdin.pause());
+        } else {
+        }
       });
     }
   });
