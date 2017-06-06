@@ -1,5 +1,5 @@
 import { authenticate } from '../github/github';
-import { get } from '../github/gist';
+import { get, create } from '../github/gist';
 import { download } from '../download';
 import { get as getConfig, set as setConfig } from '../config';
 import print from './print';
@@ -19,18 +19,12 @@ export default () => {
     // Gist id is not set or invalid gist id
     if (e && e.code === 404) {
       co(function*() {
-        print.error('Gist id is not set.');
-        const gistId = yield prompt(
-          chalk.yellow('Gist id(Do not enter to create a new gist): ')
-        );
-        if (gistId && gistId.length) {
-          setConfig('repository.gist', gistId);
-          get(gistId)
-            .then(executeDownload)
-            .catch(({ message }) => print.error(`GIST ERROR`, message))
-            .then(() => process.stdin.pause());
-        } else {
-        }
+        print.error('Gist id is not set or invalid.');
+        const gistId = yield prompt(chalk.yellow('Gist id: '));
+        get(gistId)
+          .then(executeDownload)
+          .catch(({ message }) => print.error(`GIST ERROR`, message))
+          .then(() => process.stdin.pause());
       });
     }
   });
