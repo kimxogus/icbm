@@ -8,7 +8,7 @@ import { omit, pick } from 'lodash';
 import { validate } from './keys';
 import { appName, appDir, configFile } from '../paths';
 
-import defaultConfig from './defaultConfig.json';
+import defaultConfig from './defaultConfig';
 
 export const getConfig = (key: ?string): string | object => {
   const config = getConfigs(key);
