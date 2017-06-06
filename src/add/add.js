@@ -78,7 +78,7 @@ export default (file: string, option: ?object): responseType => {
   ensureSymlinkSync(addedFilePath, srcPath);
 
   // add config
-  config.set(`path.${file}`, srcPath);
+  config.setConfig(`path.${file}`, srcPath);
 
   return success;
 };

@@ -1,4 +1,4 @@
-import { get, set } from './file';
+import { getConfig, setConfig } from './file';
 import * as keys from './keys';
 
-export { set, get, keys };
+export { setConfig, getConfig, keys };

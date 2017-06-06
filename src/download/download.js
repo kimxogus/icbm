@@ -4,7 +4,7 @@ import path from 'path';
 import stringify from 'json-stable-stringify';
 
 import { appDir } from '../paths';
-import { get as getConfig } from '../config';
+import { getConfig } from '../config';
 import * as gist from '../github/gist';
 import version from '../version';
 

@@ -10,7 +10,7 @@ import { appName, appDir, configFile } from '../paths';
 
 import defaultConfig from './defaultConfig.json';
 
-export const get = (key: ?string): string | object => {
+export const getConfig = (key: ?string): string | object => {
   const config = omit(rc(appName), ['_', 'config', 'configs']) || {
     ...defaultConfig,
   };
@@ -18,7 +18,7 @@ export const get = (key: ?string): string | object => {
   return key ? config[key] : config;
 };
 
-export const set = (key: string, value: string | number): object => {
+export const setConfig = (key: string, value: string | number): object => {
   mkdirpSync(appDir);
 
   const existingConfig: object = fs.existsSync(configFile)

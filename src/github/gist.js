@@ -1,5 +1,5 @@
 import github, { authenticate } from './github';
-import { get as getConfig, set as setConfig } from '../config';
+import { getConfig, setConfig } from '../config';
 
 export const create = (option: object): Promise<object> => {
   authenticate();

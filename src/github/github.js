@@ -1,5 +1,5 @@
 import Github from 'github';
-import { get as getConfig } from '../config';
+import { getConfig } from '../config';
 import getEnvVar from '../util/getEnvVar';
 import Promise from 'bluebird';
 

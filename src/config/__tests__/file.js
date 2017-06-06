@@ -9,19 +9,19 @@ if (existsSync(dir)) {
 }
 
 test('get nothing', () => {
-  expect(file.get()).toMatchObject({});
+  expect(file.getConfig()).toMatchObject({});
 });
 
 test('set and get repository type', () => {
   const key = 'repository.type';
   const value = 'gist';
 
-  const newConfig = file.set(key, value);
+  const newConfig = file.setConfig(key, value);
   expect(newConfig).toMatchObject({
     [key]: value,
   });
 
   expect(newConfig[key]).toBe(value);
 
-  expect(file.get(key)).toBe(value);
+  expect(file.getConfig(key)).toBe(value);
 });

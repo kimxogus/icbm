@@ -1,7 +1,7 @@
 import { authenticate } from '../github/github';
 import { get, create } from '../github/gist';
 import { download } from '../download';
-import { get as getConfig, set as setConfig } from '../config';
+import { getConfig, setConfig } from '../config';
 import print from './print';
 import leftPad from 'left-pad';
 import co from 'co';
