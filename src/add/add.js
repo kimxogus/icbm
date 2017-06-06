@@ -68,7 +68,8 @@ export default (file: string, filePath: ?string): responseType => {
   const addedFilePath = path.join(appDir, file);
 
   // replace original file with symlink
-  copySync(srcPath, `${srcPath}.bak`);
+  if (config.getConfig('file.createBackup'))
+    copySync(srcPath, `${srcPath}.bak`);
   copySync(srcPath, addedFilePath);
   removeSync(srcPath);
   ensureSymlinkSync(addedFilePath, srcPath);
