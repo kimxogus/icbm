@@ -75,3 +75,4 @@ xus config get
 - multiple repositories to backup configurations
 - add node api
 - rewrite in golang(for standalone app)
+- support for other apps (list of formulas like `brew list` and `brew cask list`)
