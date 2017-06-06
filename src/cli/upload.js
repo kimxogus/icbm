@@ -4,7 +4,7 @@ import prompt from 'co-prompt';
 import chalk from 'chalk';
 import stringify from 'json-stable-stringify';
 
-import { getConfig } from '../config';
+import { getConfig, setConfig } from '../config';
 import { upload, getUploadingFiles } from '../upload';
 import print from './print';
 import { authenticate } from '../github/github';
@@ -19,7 +19,7 @@ export default () => {
           r && r.data && r.data.files
             ? executeUpload()
             : Promise.reject({ code: 404 })
-      ) //.then(executeUpload)
+      )
     : Promise.reject({ code: 404 });
 
   getGistAndUpload.catch(e => {
@@ -30,7 +30,9 @@ export default () => {
         const gistId = yield prompt(
           chalk.yellow('Gist id(Empty to create a new gist): ')
         );
-        (gistId && gistId.length ? get(gistId) : create())
+        (gistId && gistId.length
+          ? get(gistId).then(() => setConfig('repository.gist', gistId))
+          : create())
           .then(executeUpload)
           .catch(({ message }) => print.error(`GIST ERROR`, message))
           .then(() => process.stdin.pause());
@@ -41,10 +43,22 @@ export default () => {
 
 const executeUpload = () =>
   upload()
+    .catch(
+      err =>
+        new Promise((resolve, reject) => {
+          if (err && err.code === 401) {
+            co(function*() {
+              print.error('Invalid token', 'Github Token is not valid.');
+              const githubToken = yield prompt(chalk.yellow('Github Token: '));
+              setConfig('repository.githubToken', githubToken);
+              resolve(upload());
+            });
+          } else {
+            reject(err);
+          }
+        })
+    )
     .then(uploadedFiles => {
       print.info(`Uploaded files successfully.`);
       print.info(uploadedFiles.map(f => `- ${f}`).join('\n'));
-    })
-    .catch(err => {
-      print.error('Upload error', stringify(err));
     });
