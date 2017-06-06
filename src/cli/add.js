@@ -8,7 +8,7 @@ export default (file: string, filePath: ?string) => {
     case response.success:
       return print.info(`${file} is successfully added.`);
     case response.alreadyAdded:
-      return print.warn(`${file} is already added.`);
+      return print.warn(`${file} seems already added.`);
     case response.unsupported:
       return print.error(
         'Unsupported configuration',
