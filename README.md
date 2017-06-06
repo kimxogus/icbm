@@ -66,7 +66,7 @@ xus config get
   - Repository Type `repository.type` (Only gist is available now)
   - Gist id `repository.gist` (You can set using prompt in uploading and downloading)
   - Github Token `repository.githubToken` (You can set using prompt in uploading. https://github.com/settings/tokens)
-  - Create backup on add `file.createBackup` (.bak file will be created on add. `false` by default.)
+  - Create backup on add `file.createBackup` (.bak file will be created on add. `true` by default.)
 
 
 ## TODO
