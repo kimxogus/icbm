@@ -1,6 +1,6 @@
 # xus
 
-> CLI tool to manage your configuration files
+> CLI tool to manage and backup your configuration files
 
 [![npm version](https://img.shields.io/npm/v/xus.svg)](https://npmjs.org/package/xus)
 [![npm downloads](https://img.shields.io/npm/dm/xus.svg)](https://npmjs.org/package/xus)
@@ -71,6 +71,7 @@ xus config get
 
 ## TODO
 - add `remove` action (`xus remove <conf_name>`)
+- resolve paths in different os and env(like $HOME)
 - multiple repositories to backup configurations
 - add node api
 - rewrite in golang(for standalone app)
