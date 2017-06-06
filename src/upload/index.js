@@ -1,3 +1,3 @@
-import upload from './upload';
+import upload, { getUploadingFiles } from './upload';
 
-export { upload };
+export { upload, getUploadingFiles };

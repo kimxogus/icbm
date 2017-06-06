@@ -13,7 +13,7 @@ const github = new Github({
 
 export default github;
 
-export const authenticate = () => {
+export const authenticate = (): Promise<> => {
   const token = getConfig('repository.githubToken');
 
   if (!token)
@@ -21,5 +21,6 @@ export const authenticate = () => {
       `Set github token using 'xus config set repository.githubToken <token>'`
     );
 
-  return github.authenticate({ type: 'oauth', token });
+  github.authenticate({ type: 'oauth', token });
+  return Promise.resolve();
 };

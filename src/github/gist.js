@@ -1,13 +1,16 @@
 import github, { authenticate } from './github';
 import { getConfig, setConfig } from '../config';
 
-export const create = (option: object): Promise<object> => {
+export const create = (files: object = {}): Promise<object> => {
   authenticate();
 
-  return github.gists.create(option).then(res => {
-    setConfig('repository.gist', res.data.id);
-    return Promise.resolve(res);
-  });
+  return github.gists
+    .create({
+      description: 'Gist for xus',
+      public: false,
+      files,
+    })
+    .then(res => setConfig('repository.gist', res.data.id));
 };
 
 export const get = (id: ?string): Promise<object> => {

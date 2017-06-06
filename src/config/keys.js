@@ -17,7 +17,7 @@ export const validate = (key: string, value: ?string): boolean => {
 
   if (!has(keyMap, key)) return false;
 
-  if (isNil(value)) return true;
+  if (isNil(value)) return false;
 
   return String(value).match(keyMap[key]) !== null;
 };

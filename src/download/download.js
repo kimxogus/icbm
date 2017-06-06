@@ -48,9 +48,13 @@ export default (): response => {
         for (let i = 0, len = fileList.length; i < len; i++) {
           const file = fileList[i];
           const content = files[file].content;
-          fs.writeFileSync(path.join(appDir, file), content, {
-            encoding: 'utf8',
-          });
+          fs.writeFileSync(
+            path.join(appDir, file),
+            content === 'EMPTY_CONTENT' ? '' : content,
+            {
+              encoding: 'utf8',
+            }
+          );
         }
 
         return linkFiles();
