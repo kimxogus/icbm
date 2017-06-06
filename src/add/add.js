@@ -27,12 +27,8 @@ export const response = {
   unsupported,
 };
 
-export default (file: string, option: ?object): responseType => {
+export default (file: string, filePath: ?string): responseType => {
   mkdirpSync(appDir);
-
-  option = defaults(option, {
-    path: null,
-  });
 
   let srcPath = null;
   const homePath = getEnvVar('HOME');
@@ -41,24 +37,24 @@ export default (file: string, option: ?object): responseType => {
       return unsupported;
 
     case 'bash_profile':
-      srcPath = defaultTo(option.path, path.join(homePath, '.bash_profile'));
+      srcPath = defaultTo(filePath, path.join(homePath, '.bash_profile'));
       break;
 
     case 'bashrc':
-      srcPath = defaultTo(option.path, path.join(homePath, '.bashrc'));
+      srcPath = defaultTo(filePath, path.join(homePath, '.bashrc'));
       break;
 
     case 'vimrc':
-      srcPath = defaultTo(option.path, path.join(homePath, '.vimrc'));
+      srcPath = defaultTo(filePath, path.join(homePath, '.vimrc'));
       break;
 
     case 'gitconfig':
-      srcPath = defaultTo(option.path, path.join(homePath, '.gitconfig'));
+      srcPath = defaultTo(filePath, path.join(homePath, '.gitconfig'));
       break;
 
     default:
-      if (!option.path) return unsupported;
-      srcPath = option.path;
+      if (!filePath) return unsupported;
+      srcPath = filePath;
   }
 
   if (!srcPath) return fail;

@@ -1,8 +1,8 @@
 import print from './print';
 import { add, response, responseType } from '../add';
 
-export default (file: string, option: ?object) => {
-  const res: responseType = add(file, option);
+export default (file: string, filePath: ?string) => {
+  const res: responseType = add(file, filePath);
 
   switch (res) {
     case response.success:
@@ -11,7 +11,8 @@ export default (file: string, option: ?object) => {
       return print.warn(`${file} is already added.`);
     case response.unsupported:
       return print.error(
-        `${file} is not supported by default. Specify path with --path option.`
+        'Unsupported configuration',
+        `${file} is not supported by default. Specify file path.`
       );
     case response.fail:
       return print.error(`${file} was not added.`);

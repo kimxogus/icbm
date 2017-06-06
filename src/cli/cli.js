@@ -11,14 +11,7 @@ program.version(version);
 // Commands
 program.command('config <type> [key] [value]').action(config);
 
-program
-  .command('add <file>')
-  .option('--path', 'path of the file')
-  .action(file => {
-    add(file, {
-      path: program.path,
-    });
-  });
+program.command('add <file> [path]').action((file, path) => add(file, path));
 
 program.command('upload').action(() => {
   upload();
