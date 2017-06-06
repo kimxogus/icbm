@@ -3,15 +3,19 @@ import * as fs from 'fs';
 import { sync as mkdirpSync } from 'mkdirp';
 import rc from 'rc';
 import stringify from 'json-stable-stringify';
-import { get as lodashGet, omit } from 'lodash';
+import { omit } from 'lodash';
 
 import { validate } from './keys';
 import { appName, appDir, configFile } from '../paths';
 
-export const get = (key: ?string): string | object => {
-  const config = omit(rc(appName), ['_', 'config', 'configs']) || {};
+import defaultConfig from './defaultConfig.json';
 
-  return key ? lodashGet(config, key) : config;
+export const get = (key: ?string): string | object => {
+  const config = omit(rc(appName), ['_', 'config', 'configs']) || {
+    ...defaultConfig,
+  };
+
+  return key ? config[key] : config;
 };
 
 export const set = (key: string, value: string | number): object => {
