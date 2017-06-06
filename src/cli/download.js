@@ -21,7 +21,7 @@ export default () => {
     if (e && e.code === 404) {
       co(function*() {
         print.error('Invalid gist', 'Gist id is not set or invalid.');
-        const gistId = yield prompt(chalk.yellow('Gist id: '));
+        const gistId = yield prompt(chalk.green('Gist id: '));
         get(gistId)
           .then(executeDownload)
           .catch(({ message }) => print.error(`GIST ERROR`, message))

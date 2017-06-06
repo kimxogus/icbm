@@ -28,7 +28,7 @@ export default () => {
       co(function*() {
         print.error('Invalid gist', 'Gist id is not set or invalid.');
         const gistId = yield prompt(
-          chalk.yellow('Gist id(Empty to create a new gist): ')
+          chalk.green('Gist id(Empty to create a new gist): ')
         );
         (gistId && gistId.length
           ? get(gistId).then(() => setConfig('repository.gist', gistId))
@@ -49,7 +49,7 @@ const executeUpload = () =>
           if (err && err.code === 401) {
             co(function*() {
               print.error('Invalid token', 'Github Token is not valid.');
-              const githubToken = yield prompt(chalk.yellow('Github Token: '));
+              const githubToken = yield prompt(chalk.green('Github Token: '));
               setConfig('repository.githubToken', githubToken);
               resolve(upload());
             });

@@ -1,6 +1,8 @@
 import chalk from 'chalk';
 import { get, isNil } from 'lodash';
 
+import version from '../version';
+
 const printConfigPair = (config: object, key: ?string) =>
   print.info(`${key} = ${get(config, key)}`);
 
@@ -11,7 +13,8 @@ const print = {
   config: (config: object, key: ?string) =>
     isNil(key) ? printConfigObject(config) : printConfigPair(config, key),
   info: (...args) => console.log.apply(null, args),
-  warn: (...args) => console.log.apply(null, args.map(a => chalk.yellow(a))),
+  warn: (...args) =>
+    console.log.apply(null, args.map(a => chalk.bold.yellow(a))),
   error: (type, message) =>
     console.error(chalk.red(`ERROR: ${type || ''} - ${message || ''}`)),
 };
