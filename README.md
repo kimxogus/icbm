@@ -20,12 +20,12 @@
 ## Usage
 
 ### Add Configurations
-- Supported configuration
+- For supported configuration files
 ```bash
 xus add file_name
 ```
     
-- Not supported
+- For not supported configuration files
 ```bash
 xus add your_conf_name /path/to/your_conf
 ```
