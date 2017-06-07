@@ -10,7 +10,6 @@ cache:
  - "%LOCALAPPDATA%\\Yarn"
 
 platform:
-  - x86
   - x64
 
 install:
