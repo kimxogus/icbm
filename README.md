@@ -4,7 +4,12 @@
 
 [![npm version](https://img.shields.io/npm/v/xus.svg)](https://npmjs.org/package/xus)
 [![npm downloads](https://img.shields.io/npm/dm/xus.svg)](https://npmjs.org/package/xus)
+
+
 [![Build Status](https://travis-ci.org/kimxogus/xus.svg?branch=master)](https://travis-ci.org/kimxogus/xus)
+[![Build status](https://ci.appveyor.com/api/projects/status/1m7wtxfif2b1thh8/branch/master?svg=true)](https://ci.appveyor.com/project/kimxogus/xus/branch/master)
+
+
 [![Dependencies Status](https://david-dm.org/kimxogus/xus/status.svg)](https://david-dm.org/kimxogus/xus)
 [![DevDependencies Status](https://david-dm.org/kimxogus/xus/dev-status.svg)](https://david-dm.org/kimxogus/xus?type=dev)
 [![Known Vulnerabilities](https://snyk.io/test/github/kimxogus/xus/badge.svg)](https://snyk.io/test/github/kimxogus/xus)
