@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import stringify from 'json-stable-stringify';
+import { has, without } from 'lodash';
 
 import { appDir } from '../paths';
 import { getConfig } from '../config';
@@ -12,7 +13,9 @@ export const getUploadingFiles = () => {
     const content = fs.readFileSync(path.join(appDir, file), 'utf8');
 
     filesObject[file] = {
-      content: content.trim().length ? content : 'EMPTY_CONTENT',
+      content: content.trim().length || content.trim() === '\n'
+        ? content
+        : 'EMPTY_CONTENT',
     };
 
     return filesObject;
@@ -37,9 +40,18 @@ export default (): Promise<Array<string>> => {
 
   switch (repoType) {
     case 'gist':
-      const files = getUploadingFiles();
+      const files: object = getUploadingFiles();
 
-      return gist.edit(files).then(() => Promise.resolve(Object.keys(files)));
+      return gist.get(getConfig('repository.gist')).then(res => {
+        const deleted = Object.keys(res.data.files).filter(f => !has(files, f));
+        deleted.forEach(f => (files[f] = null));
+        return gist.edit(files).then(() =>
+          Promise.resolve({
+            uploaded: without(Object.keys(files), ...deleted),
+            deleted,
+          })
+        );
+      });
     default:
       return Promise.reject({
         message: `${repoType} is not supported yet.`,

@@ -79,7 +79,16 @@ const executeUpload = () =>
           }
         })
     )
-    .then(uploadedFiles => {
-      print.info(`Uploaded files successfully.`);
-      print.info(uploadedFiles.map(f => `- ${f}`).join('\n'));
+    .then(({ uploaded, deleted }) => {
+      print.info(`Success`);
+
+      if (uploaded.length) {
+        print.info(chalk.bold.blue('Uploaded files'));
+        print.info(uploaded.map(f => `  - ${f}`).join('\n'));
+      }
+
+      if (deleted.length) {
+        print.info(chalk.bold.magenta('Deleted files'));
+        print.info(deleted.map(f => `  - ${f}`).join('\n'));
+      }
     });
