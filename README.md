@@ -78,8 +78,6 @@ xus config get
 
 
 ## TODO
-- `remove` action (`xus remove <conf_name>`)
-- option for publicity of repo `repository.public` (`false` by default)
 - resolve paths in different os and env(like $HOME)
 - multiple repositories to backup configurations
 - node api
