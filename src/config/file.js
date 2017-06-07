@@ -18,10 +18,10 @@ export const getConfig = (key: ?string): string | object => {
 };
 
 export const getConfigs = (...keys: ?string): object => {
-  const rcFile = os.type().toLowerCase().indexOf('windows') !== -1
-    ? readJsonSync(configFile)
+  const rcFile: object = os.type().toLowerCase().indexOf('windows') !== -1
+    ? fs.existsSync(configFile) ? readJsonSync(configFile) : {}
     : rc(appName);
-  const config = omit({ ...defaultConfig, ...rcFile }, [
+  const config: object = omit({ ...defaultConfig, ...rcFile }, [
     '_',
     'config',
     'configs',
