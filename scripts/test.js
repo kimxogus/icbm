@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 process.env.NODE_ENV = 'test';
-process.env.HOME = path.join(process.env.PWD, 'testHome');
+process.env.HOME = path.join(process.cwd(), 'testHome');
 
 if (fs.existsSync('.env.test'))
   dotenv.config({
