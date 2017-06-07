@@ -6,6 +6,12 @@
     "url": "https://github.com/kimxogus/xus.git",
     "type": "git"
   },
+  "bugs": {
+    "url": "https://github.com/kimxogus/xus/issues/"
+  },
+  "engines": {
+    "node": ">=4"
+  },
   "preferGlobal": true,
   "author": {
     "name": "Taehyun Kim",
