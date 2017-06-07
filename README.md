@@ -24,18 +24,26 @@
 ```bash
 xus add file_name
 ```
-    
+
 - For not supported configuration files
 ```bash
 xus add your_conf_name /path/to/your_conf
 ```
 
 - Configurations currently supported
-  - bash_profile
-  - bashrc
-  - gitconfig
-  - vimrc
-  
+  - bash_profile (`$HOME/.bash_profile`)
+  - bashrc (`$HOME/.bashrc`)
+  - gitconfig (`$HOME/.gitconfig`)
+  - vimrc (`$HOME/.vimrc`)
+  - zshrc (`$HOME/.zshrc`)
+
+### Remove Configurations
+- This action will remove configuration from *xus* and return it to original path.
+  (e.g. remove the symbolic link and return the managed `bash_profile` to `$HOME/.bash_profile`)
+```bash
+xus remove file_name
+```
+
 ### Upload Configurations
 ```bash
 xus upload
