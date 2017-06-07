@@ -4,3 +4,4 @@ node_modules
 .vscode
 /testHome
 /.env*
+**/__tests__/

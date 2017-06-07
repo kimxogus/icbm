@@ -9,10 +9,13 @@
     "node": true
   },
   "plugins": [
-    "flowtype"
+    "flowtype",
+    "prettier"
   ],
   "extends": [
-    "plugin:flowtype/recommended"
+    "plugin:flowtype/recommended",
+    "prettier",
+    "prettier/flowtype"
   ],
   "settings": {
     "flowtype": {
@@ -25,6 +28,14 @@
       "error",
       "smart"
     ],
-    "flowtype/no-types-missing-file-annotation": "off"
+    "flowtype/no-types-missing-file-annotation": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "es5"
+      }
+    ]
   }
 }
