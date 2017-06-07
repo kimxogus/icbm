@@ -70,9 +70,10 @@ xus config get
 
 
 ## TODO
-- add `remove` action (`xus remove <conf_name>`)
+- `remove` action (`xus remove <conf_name>`)
+- option for publicity of repo `repository.public` (`false` by default)
 - resolve paths in different os and env(like $HOME)
 - multiple repositories to backup configurations
-- add node api
+- node api
 - rewrite in golang(for standalone app)
 - support for other apps (list of formulas like `brew list` and `brew cask list`)
