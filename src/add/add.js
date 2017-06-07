@@ -52,6 +52,10 @@ export default (file: string, filePath: ?string): responseType => {
       srcPath = defaultTo(filePath, path.join(homePath, '.gitconfig'));
       break;
 
+    case 'zshrc':
+      srcPath = defaultTo(filePath, path.join(homePath, '.zshrc'));
+      break;
+
     default:
       if (!filePath) return unsupported;
       srcPath = filePath;

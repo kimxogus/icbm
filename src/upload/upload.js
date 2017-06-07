@@ -12,7 +12,7 @@ export const getUploadingFiles = () => {
     const content = fs.readFileSync(path.join(appDir, file), 'utf8');
 
     filesObject[file] = {
-      content: content.length ? content : 'EMPTY_CONTENT',
+      content: content.trim().length ? content : 'EMPTY_CONTENT',
     };
 
     return filesObject;
