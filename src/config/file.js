@@ -35,6 +35,7 @@ export const getConfigs = (...keys: ?string): object => {
 
   return Object.keys(result).reduce((c, k) => {
     c[k] = resolveEnv(result[k]);
+    return c;
   }, {});
 };
 
