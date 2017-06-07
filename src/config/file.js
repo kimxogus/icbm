@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import os from 'os';
 import { readJsonSync } from 'fs-extra';
+import getEnvVar from 'get-env-var';
 
 import { sync as mkdirpSync } from 'mkdirp';
 import rc from 'rc';
@@ -11,6 +12,7 @@ import { validate } from './keys';
 import { appName, appDir, configFile } from '../paths';
 
 import defaultConfig from './defaultConfig';
+import resolveEnv from '../util/resolveEnv';
 
 export const getConfig = (key: ?string): string | object => {
   const config = getConfigs(key);
@@ -29,7 +31,11 @@ export const getConfigs = (...keys: ?string): object => {
 
   keys = keys.filter(k => !!k);
 
-  return keys.length ? pick(config, keys) : config;
+  const result = keys.length ? pick(config, keys) : config;
+
+  return Object.keys(result).reduce((c, k) => {
+    c[k] = resolveEnv(result[k]);
+  }, {});
 };
 
 export const setConfig = (key: string, value: any): object => {
@@ -56,6 +62,13 @@ export const setConfig = (key: string, value: any): object => {
       `Invalid key value pair { '${key}' : ${value} }`,
       'Validation Error'
     );
+
+  if (key.startsWith('path.')) {
+    const homePath = getEnvVar('HOME', '');
+    if (value.startsWith(homePath)) {
+      value = '${HOME}' + String(value).substr(homePath.length);
+    }
+  }
 
   const newConfig: object = {
     ...existingConfig,

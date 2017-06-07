@@ -30,7 +30,7 @@ export const response = {
 export default (file: string, filePath: ?string): responseType => {
   mkdirpSync(appDir);
 
-  let srcPath = null;
+  let srcPath: string = null;
   const homePath = getEnvVar('HOME', '');
   switch (file) {
     case 'config':
