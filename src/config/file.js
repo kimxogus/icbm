@@ -1,4 +1,6 @@
 import * as fs from 'fs';
+import os from 'os';
+import { readJsonSync } from 'fs-extra';
 
 import { sync as mkdirpSync } from 'mkdirp';
 import rc from 'rc';
@@ -16,9 +18,14 @@ export const getConfig = (key: ?string): string | object => {
 };
 
 export const getConfigs = (...keys: ?string): object => {
-  const config = omit(rc(appName), ['_', 'config', 'configs']) || {
-    ...defaultConfig,
-  };
+  const rcFile = os.type().toLowerCase().indexOf('windows') !== -1
+    ? readJsonSync(configFile)
+    : rc(appName);
+  const config = omit({ ...defaultConfig, ...rcFile }, [
+    '_',
+    'config',
+    'configs',
+  ]);
 
   keys = keys.filter(k => !!k);
 
