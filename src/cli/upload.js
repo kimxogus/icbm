@@ -30,9 +30,24 @@ export default () => {
         const gistId = yield prompt(
           chalk.green('Gist id(Empty to create a new gist): ')
         );
-        (gistId && gistId.length
-          ? get(gistId).then(() => setConfig('repository.gist', gistId))
-          : create())
+        let createOrGet;
+        if (gistId && gistId.length) {
+          createOrGet = get(gistId).then(() =>
+            setConfig('repository.gist', gistId)
+          );
+        } else {
+          const response: string = yield prompt(
+            chalk.green('Do you want to make it public?(y/n)')
+          );
+
+          const publicity = ['y', 'yes'].indexOf(response.toLowerCase()) !== -1;
+
+          createOrGet = create({
+            files: getUploadingFiles(),
+            public: publicity,
+          });
+        }
+        createOrGet
           .then(executeUpload)
           .catch(({ message }) => print.error(`GIST ERROR`, message))
           .then(() => process.stdin.pause());
