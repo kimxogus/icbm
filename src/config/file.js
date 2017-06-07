@@ -67,7 +67,7 @@ export const removeConfig = (key: string): object => {
     ? JSON.parse(fs.readFileSync(configFile))
     : {};
 
-  const { key, ...newConfig } = existingConfig;
+  const newConfig = omit(existingConfig, [key]);
 
   fs.writeFileSync(configFile, stringify(newConfig, { space: '  ' }));
 
