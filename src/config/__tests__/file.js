@@ -23,5 +23,7 @@ test('set and get repository type', () => {
 
   expect(newConfig[key]).toBe(value);
 
+  console.log(file.getConfig(key));
+
   expect(file.getConfig(key)).toBe(value);
 });
