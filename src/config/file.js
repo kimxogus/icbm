@@ -59,3 +59,17 @@ export const setConfig = (key: string, value: any): object => {
 
   return newConfig;
 };
+
+export const removeConfig = (key: string): object => {
+  mkdirpSync(appDir);
+
+  const existingConfig: object = fs.existsSync(configFile)
+    ? JSON.parse(fs.readFileSync(configFile))
+    : {};
+
+  const { key, ...newConfig } = existingConfig;
+
+  fs.writeFileSync(configFile, stringify(newConfig, { space: '  ' }));
+
+  return newConfig;
+};
