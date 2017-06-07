@@ -42,6 +42,12 @@ export default () => {
 
           const publicity = ['y', 'yes'].indexOf(response.toLowerCase()) !== -1;
 
+          print.info(
+            `Gist will be created in ${chalk.bold.white(
+              publicity ? 'pubic' : 'private'
+            )}.`
+          );
+
           createOrGet = create({
             files: getUploadingFiles(),
             public: publicity,
