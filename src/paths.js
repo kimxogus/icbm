@@ -1,11 +1,12 @@
 import path from 'path';
-import getEnvVar from './util/getEnvVar';
+import getEnvVar from 'get-env-var';
 
 export const appName: string = 'xus';
 
-const home: string = getEnvVar('CI') || getEnvVar('NODE_ENV') === 'test'
+const home: string = getEnvVar('CI', false) ||
+  getEnvVar('NODE_ENV', 'development') === 'test'
   ? path.join(process.cwd(), 'testHome')
-  : getEnvVar('HOME');
+  : getEnvVar('HOME', '');
 
 export const appDir: string = path.join(home, `.${appName}`);
 

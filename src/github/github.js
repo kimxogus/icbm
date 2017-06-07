@@ -1,10 +1,10 @@
 import Github from 'github';
 import { getConfig } from '../config';
-import getEnvVar from '../util/getEnvVar';
+import getEnvVar from 'get-env-var';
 import Promise from 'bluebird';
 
 const github = new Github({
-  debug: getEnvVar('NODE_ENV') !== 'production',
+  debug: getEnvVar('NODE_ENV', 'development') !== 'production',
   headers: {
     'user-agent': 'xus',
   },

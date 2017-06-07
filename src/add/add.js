@@ -9,7 +9,7 @@ import {
 } from 'fs-extra';
 import { defaultTo, defaults } from 'lodash';
 
-import getEnvVar from '../util/getEnvVar';
+import getEnvVar from 'get-env-var';
 import { appDir } from '../paths';
 import * as config from '../config';
 
@@ -31,7 +31,7 @@ export default (file: string, filePath: ?string): responseType => {
   mkdirpSync(appDir);
 
   let srcPath = null;
-  const homePath = getEnvVar('HOME');
+  const homePath = getEnvVar('HOME', '');
   switch (file) {
     case 'config':
       return unsupported;

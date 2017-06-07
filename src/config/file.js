@@ -15,7 +15,7 @@ export const getConfig = (key: ?string): string | object => {
   return key ? config[key] : config;
 };
 
-export const getConfigs = (...keys: ?string): string | object => {
+export const getConfigs = (...keys: ?string): object => {
   const config = omit(rc(appName), ['_', 'config', 'configs']) || {
     ...defaultConfig,
   };
