@@ -22,10 +22,11 @@ export const getUploadingFiles = () => {
   }, {});
 
   files.syncInfo = {
-    content: stringify({
-      version,
-      lastUpdated: new Date().toISOString(),
-    }),
+    content:
+      stringify({
+        version,
+        lastUpdated: new Date().toISOString(),
+      }) + '\n',
   };
   return files;
 };
