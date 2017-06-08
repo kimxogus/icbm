@@ -5,3 +5,5 @@ node_modules
 /testHome
 /.env*
 **/__tests__/
+.travis.yml
+.appveyor.yml

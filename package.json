@@ -1,13 +1,13 @@
 {
-  "name": "xus",
-  "version": "0.1.1",
-  "description": "eXtremely easy to Upload Settings",
+  "name": "icbm",
+  "version": "0.2.0",
+  "description": "Interactive Configurations Backup and Management",
   "repository": {
-    "url": "https://github.com/kimxogus/xus.git",
+    "url": "https://github.com/kimxogus/icbm.git",
     "type": "git"
   },
   "bugs": {
-    "url": "https://github.com/kimxogus/xus/issues/"
+    "url": "https://github.com/kimxogus/icbm/issues/"
   },
   "engines": {
     "node": ">=4"
@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "bin": {
-    "xus": "bin/xus.js"
+    "icbm": "bin/icbm.js"
   },
   "scripts": {
     "format": "eslint --fix .",

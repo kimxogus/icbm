@@ -36,7 +36,7 @@ export default (): Promise<Array<string>> => {
 
   if (!repoType)
     throw new Error(
-      `Specify the repository type using 'xus config set <key> <value>'`
+      `Specify the repository type using 'icbm config set <key> <value>'`
     );
 
   switch (repoType) {

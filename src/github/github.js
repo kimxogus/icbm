@@ -6,7 +6,7 @@ import Promise from 'bluebird';
 const github = new Github({
   debug: getEnvVar('NODE_ENV', 'development') !== 'production',
   headers: {
-    'user-agent': 'xus',
+    'user-agent': 'icbm',
   },
   Promise,
 });
@@ -18,7 +18,7 @@ export const authenticate = (): Promise<> => {
 
   if (!token)
     throw new Error(
-      `Set github token using 'xus config set repository.githubToken <token>'`
+      `Set github token using 'icbm config set repository.githubToken <token>'`
     );
 
   github.authenticate({ type: 'oauth', token });

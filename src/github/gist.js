@@ -6,7 +6,7 @@ export const create = (option: object = {}): Promise<object> => {
 
   return github.gists
     .create({
-      description: 'Gist for xus',
+      description: 'Gist for icbm',
       public: false,
       ...option,
     })
