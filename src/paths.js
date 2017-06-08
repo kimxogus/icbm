@@ -1,7 +1,7 @@
 import path from 'path';
 import getEnvVar from 'get-env-var';
 
-export const appName: string = 'xus';
+export const appName: string = 'icbm';
 
 const home: string = getEnvVar('CI', false) ||
   getEnvVar('NODE_ENV', 'development') === 'test'

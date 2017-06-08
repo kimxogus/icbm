@@ -1,38 +1,38 @@
-# xus
+# icbm
 
 > CLI tool to manage and backup your configuration files
 
-[![npm version](https://img.shields.io/npm/v/xus.svg)](https://npmjs.org/package/xus)
-[![npm downloads](https://img.shields.io/npm/dm/xus.svg)](https://npmjs.org/package/xus)
+[![npm version](https://img.shields.io/npm/v/icbm.svg)](https://npmjs.org/package/icbm)
+[![npm downloads](https://img.shields.io/npm/dm/icbm.svg)](https://npmjs.org/package/icbm)
 
 
-[![Build Status](https://travis-ci.org/kimxogus/xus.svg?branch=master)](https://travis-ci.org/kimxogus/xus)
-[![Build status](https://ci.appveyor.com/api/projects/status/1m7wtxfif2b1thh8/branch/master?svg=true)](https://ci.appveyor.com/project/kimxogus/xus/branch/master)
+[![Build Status](https://travis-ci.org/kimxogus/icbm.svg?branch=master)](https://travis-ci.org/kimxogus/icbm)
+[![Build status](https://ci.appveyor.com/api/projects/status/1m7wtxfif2b1thh8/branch/master?svg=true)](https://ci.appveyor.com/project/kimxogus/icbm/branch/master)
 
 
-[![Dependencies Status](https://david-dm.org/kimxogus/xus/status.svg)](https://david-dm.org/kimxogus/xus)
-[![DevDependencies Status](https://david-dm.org/kimxogus/xus/dev-status.svg)](https://david-dm.org/kimxogus/xus?type=dev)
-[![Known Vulnerabilities](https://snyk.io/test/github/kimxogus/xus/badge.svg)](https://snyk.io/test/github/kimxogus/xus)
+[![Dependencies Status](https://david-dm.org/kimxogus/icbm/status.svg)](https://david-dm.org/kimxogus/icbm)
+[![DevDependencies Status](https://david-dm.org/kimxogus/icbm/dev-status.svg)](https://david-dm.org/kimxogus/icbm?type=dev)
+[![Known Vulnerabilities](https://snyk.io/test/github/kimxogus/icbm/badge.svg)](https://snyk.io/test/github/kimxogus/icbm)
 
 
 ## Prerequisites
 - node.js  `>= 4`
 
 ## Installation
-- npm `npm install -g xus`
-- yarn `yarn global add xus`
+- npm `npm install -g icbm`
+- yarn `yarn global add icbm`
 
 ## Usage
 
 ### Add Configurations
 - For supported configuration files
 ```bash
-xus add file_name
+icbm add file_name
 ```
 
 - For not supported configuration files
 ```bash
-xus add your_conf_name /path/to/your_conf
+icbm add your_conf_name /path/to/your_conf
 ```
 
 - Configurations currently supported
@@ -43,36 +43,36 @@ xus add your_conf_name /path/to/your_conf
   - zshrc (`$HOME/.zshrc`)
 
 ### Remove Configurations
-- This action will remove configuration from *xus* and return it to original path.
+- This action will remove configuration from *icbm* and return it to original path.
   (e.g. remove the symbolic link and return the managed `bash_profile` to `$HOME/.bash_profile`)
 ```bash
-xus remove file_name
+icbm remove file_name
 ```
 
 ### Upload Configurations
 ```bash
-xus upload
+icbm upload
 ```
 
 ### Download Configurations
 ```bash
-xus download
+icbm download
 ```
 
 ### Managing config
 - Set config
 ```bash
-xus config set config_name config_value
+icbm config set config_name config_value
 ```
 
 - Get config
 ```bash
-xus config get config_name
+icbm config get config_name
 ```
 
 - Get all configs
 ```bash
-xus config get
+icbm config get
 ```
 
 - Configurations
