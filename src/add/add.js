@@ -12,6 +12,7 @@ import { defaultTo, defaults } from 'lodash';
 import getEnvVar from 'get-env-var';
 import { appDir } from '../paths';
 import * as config from '../config';
+import stringEnvParser from 'string-env-parser';
 
 const alreadyAdded: string = 'alreadyAdded';
 const success: string = 'success';
@@ -77,6 +78,10 @@ export default (file: string, filePath: ?string): responseType => {
   copySync(srcPath, addedFilePath);
   removeSync(srcPath);
   ensureSymlinkSync(addedFilePath, srcPath);
+
+  if (srcPath.startsWith(homePath)) {
+    srcPath = '${HOME}' + srcPath.substr(homePath.length);
+  }
 
   // add config
   config.setConfig(`path.${file}`, srcPath);

@@ -3222,6 +3222,10 @@ stream-consume@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/stream-consume/-/stream-consume-0.1.0.tgz#a41ead1a6d6081ceb79f65b061901b6d8f3d1d0f"
 
+string-env-parser@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/string-env-parser/-/string-env-parser-0.1.1.tgz#0572983475561c79bf4c5c4e952fe57586dd691c"
+
 string-length@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/string-length/-/string-length-1.0.1.tgz#56970fb1c38558e9e70b728bf3de269ac45adfac"
