@@ -23,7 +23,7 @@
     "icbm": "bin/icbm.js"
   },
   "scripts": {
-    "format": "eslint --fix .",
+    "format": "babel-node scripts/format",
     "prelint": "npm run format",
     "lint": "eslint .",
     "pretest": "npm run lint",
