@@ -12,7 +12,7 @@ import { validate } from './keys';
 import { appName, appDir, configFile } from '../paths';
 
 import defaultConfig from './defaultConfig';
-import resolveEnv from '../util/resolveEnv';
+import injectEnv from 'inject-env';
 
 export const getConfig = (key: ?string): string | object => {
   const config = getConfigs(key);
@@ -34,7 +34,7 @@ export const getConfigs = (...keys: ?string): object => {
   const result = keys.length ? pick(config, keys) : config;
 
   return Object.keys(result).reduce((c, k) => {
-    c[k] = resolveEnv(result[k]);
+    c[k] = injectEnv(result[k]);
     return c;
   }, {});
 };

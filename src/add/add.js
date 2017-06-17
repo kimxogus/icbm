@@ -12,7 +12,7 @@ import { defaultTo, defaults } from 'lodash';
 import getEnvVar from 'get-env-var';
 import { appDir } from '../paths';
 import * as config from '../config';
-import stringEnvParser from 'string-env-parser';
+import injectEnv from 'inject-env';
 
 const alreadyAdded: string = 'alreadyAdded';
 const success: string = 'success';
