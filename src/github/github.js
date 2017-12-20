@@ -2,14 +2,12 @@
 import Github from 'github';
 import { getConfig } from '../config';
 import getEnvVar from 'get-env-var';
-import Promise from 'bluebird';
 
 const github = new Github({
   debug: getEnvVar('NODE_ENV', 'development') !== 'production',
   headers: {
     'user-agent': 'icbm',
   },
-  Promise,
 });
 
 export default github;
