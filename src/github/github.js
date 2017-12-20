@@ -2,11 +2,12 @@
 import Github from 'github';
 import { getConfig } from '../config';
 import getEnvVar from 'get-env-var';
+import version from '../version';
 
 const github = new Github({
   debug: getEnvVar('NODE_ENV', 'development') !== 'production',
   headers: {
-    'user-agent': 'icbm',
+    'user-agent': `icbm v${version}, node v${process.versions.node}`,
   },
 });
 
