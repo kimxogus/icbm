@@ -13,14 +13,15 @@ import { get, create } from '../github/gist';
 export default () => {
   const gist = getConfig('repository.gist');
 
-  const getGistAndUpload = gist && gist.length
-    ? get(gist).then(
-        r =>
-          r && r.data && r.data.files
-            ? executeUpload()
-            : Promise.reject({ code: 404 })
-      )
-    : Promise.reject({ code: 404 });
+  const getGistAndUpload =
+    gist && gist.length
+      ? get(gist).then(
+          r =>
+            r && r.data && r.data.files
+              ? executeUpload()
+              : Promise.reject({ code: 404 })
+        )
+      : Promise.reject({ code: 404 });
 
   getGistAndUpload.catch(e => {
     // Gist id is not set or invalid gist id

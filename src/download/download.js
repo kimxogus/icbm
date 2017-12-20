@@ -13,22 +13,27 @@ type response = Promise<Array<{ name: string, path: string }>>;
 const linkFiles = (): response => {
   const config = getConfig();
   return Promise.resolve(
-    Object.keys(config).filter(key => key.startsWith('path.')).map(key => {
-      const file = key.substr(5);
-      const filePath = config[key];
+    Object.keys(config)
+      .filter(key => key.startsWith('path.'))
+      .map(key => {
+        const file = key.substr(5);
+        const filePath = config[key];
 
-      if (fs.existsSync(filePath) && !fs.statSync(filePath).isSymbolicLink()) {
-        copySync(filePath, `${filePath}.bak`);
-        removeSync(filePath);
-      }
+        if (
+          fs.existsSync(filePath) &&
+          !fs.statSync(filePath).isSymbolicLink()
+        ) {
+          copySync(filePath, `${filePath}.bak`);
+          removeSync(filePath);
+        }
 
-      ensureSymlinkSync(path.join(appDir, file), filePath);
+        ensureSymlinkSync(path.join(appDir, file), filePath);
 
-      return {
-        name: file,
-        path: filePath,
-      };
-    })
+        return {
+          name: file,
+          path: filePath,
+        };
+      })
   );
 };
 

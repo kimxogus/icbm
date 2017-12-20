@@ -3,10 +3,10 @@ import getEnvVar from 'get-env-var';
 
 export const appName: string = 'icbm';
 
-const home: string = getEnvVar('CI', false) ||
-  getEnvVar('NODE_ENV', 'development') === 'test'
-  ? path.join(process.cwd(), 'testHome')
-  : getEnvVar('HOME', '');
+const home: string =
+  getEnvVar('CI', false) || getEnvVar('NODE_ENV', 'development') === 'test'
+    ? path.join(process.cwd(), 'testHome')
+    : getEnvVar('HOME', '');
 
 export const appDir: string = path.join(home, `.${appName}`);
 

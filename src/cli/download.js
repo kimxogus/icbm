@@ -12,9 +12,10 @@ import print from './print';
 export default () => {
   const gist = getConfig('repository.gist');
 
-  const getGistAndDownload = gist && gist.length
-    ? get(gist).then(executeDownload)
-    : Promise.reject({ code: 404 });
+  const getGistAndDownload =
+    gist && gist.length
+      ? get(gist).then(executeDownload)
+      : Promise.reject({ code: 404 });
 
   getGistAndDownload.catch(e => {
     // Gist id is not set or invalid gist id
