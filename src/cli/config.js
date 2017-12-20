@@ -1,3 +1,4 @@
+// @flow
 import { isNil } from 'lodash';
 import print from './print';
 import * as config from '../config';

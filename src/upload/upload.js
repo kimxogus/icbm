@@ -1,3 +1,4 @@
+// @flow
 import fs from 'fs';
 import path from 'path';
 import stringify from 'json-stable-stringify';

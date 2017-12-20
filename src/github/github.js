@@ -1,3 +1,4 @@
+// @flow
 import Github from 'github';
 import { getConfig } from '../config';
 import getEnvVar from 'get-env-var';

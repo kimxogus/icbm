@@ -1,3 +1,4 @@
+// @flow
 import print from './print';
 import { add, response, responseType } from '../add';
 

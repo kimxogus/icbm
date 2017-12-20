@@ -1,3 +1,4 @@
+// @flow
 import github, { authenticate } from './github';
 import { getConfig, setConfig } from '../config';
 

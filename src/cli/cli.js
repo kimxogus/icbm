@@ -1,3 +1,4 @@
+// @flow
 import program from 'commander';
 import config from './config';
 import add from './add';

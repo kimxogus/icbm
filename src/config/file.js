@@ -1,3 +1,4 @@
+// @flow
 import * as fs from 'fs';
 import os from 'os';
 import { readJsonSync } from 'fs-extra';

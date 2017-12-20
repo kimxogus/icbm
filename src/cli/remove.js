@@ -1,3 +1,4 @@
+// @flow
 import print from './print';
 import { remove, response, responseType } from '../remove';
 

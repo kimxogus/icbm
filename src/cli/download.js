@@ -1,3 +1,4 @@
+// @flow
 import leftPad from 'left-pad';
 import co from 'co';
 import prompt from 'co-prompt';

@@ -1,3 +1,4 @@
+// @flow
 import fs from 'fs';
 import { copySync, removeSync, ensureSymlinkSync } from 'fs-extra';
 import path from 'path';

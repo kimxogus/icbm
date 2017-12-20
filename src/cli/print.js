@@ -1,3 +1,4 @@
+// @flow
 import chalk from 'chalk';
 import { get, isNil } from 'lodash';
 

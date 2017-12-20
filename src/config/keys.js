@@ -1,3 +1,4 @@
+// @flow
 import { isNil, has, startsWith } from 'lodash';
 
 const keyMap = {

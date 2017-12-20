@@ -1,3 +1,4 @@
+// @flow
 import path from 'path';
 import getEnvVar from 'get-env-var';
 

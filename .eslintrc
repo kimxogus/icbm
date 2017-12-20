@@ -28,14 +28,6 @@
       "error",
       "smart"
     ],
-    "flowtype/no-types-missing-file-annotation": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "tabWidth": 2,
-        "trailingComma": "es5"
-      }
-    ]
+    "prettier/prettier": "error"
   }
 }

@@ -1,3 +1,4 @@
+// @flow
 import path from 'path';
 import { sync as mkdirpSync } from 'mkdirp';
 import fs from 'fs';
