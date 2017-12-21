@@ -56,6 +56,7 @@ export default () => {
           });
         }
         createOrGet
+          .then(() => setConfig('repository.gist', gistId))
           .then(executeUpload)
           .catch(({ message }) => print.error(`GIST ERROR`, message))
           .then(() => process.stdin.pause());
