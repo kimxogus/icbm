@@ -25,8 +25,11 @@ export default () => {
         print.error('Invalid gist', 'Gist id is not set or invalid.');
         const gistId = yield prompt(chalk.green('Gist id: '));
         get(gistId)
+          .then(({ data: { id } }) => setConfig('repository.gist', id))
           .then(executeDownload)
-          .catch(({ message }) => print.error(`GIST ERROR`, message))
+          .catch(({ message, ...others }) =>
+            print.error(`GIST ERROR`, message + ' ' + JSON.stringify(others))
+          )
           .then(() => process.stdin.pause());
       });
     }
@@ -34,15 +37,11 @@ export default () => {
 };
 
 const executeDownload = () =>
-  download()
-    .then(downloadedFiles => {
-      print.info(`Downloaded files successfully.`);
-      print.info(
-        downloadedFiles
-          .map(({ name, path }) => `${leftPad(name, 15)} > ${path}`)
-          .join('\n')
-      );
-    })
-    .catch(err => {
-      print.error('Upload error', stringify(err));
-    });
+  download().then(downloadedFiles => {
+    print.info(`Downloaded files successfully.`);
+    print.info(
+      downloadedFiles
+        .map(({ name, path }) => `${leftPad(name, 15)} > ${path}`)
+        .join('\n')
+    );
+  });

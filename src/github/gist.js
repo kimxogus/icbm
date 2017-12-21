@@ -17,7 +17,7 @@ export const create = (option: object = {}): Promise<object> => {
 export const get = (id: ?string): Promise<object> => {
   id = id || getConfig('repository.gist');
 
-  if (!id || !id.length) return Promise.reject('EMPTY');
+  if (!id || !id.length) return Promise.reject({ message: 'ID is empty' });
 
   return github.gists.get({ id });
 };
