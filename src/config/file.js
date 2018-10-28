@@ -24,7 +24,9 @@ export const getConfigs = (...keys: ?string): object => {
       .type()
       .toLowerCase()
       .indexOf('windows') !== -1
-      ? fs.existsSync(configFile) ? readJsonSync(configFile) : {}
+      ? fs.existsSync(configFile)
+        ? readJsonSync(configFile)
+        : {}
       : rc(appName);
   const config: object = omit({ ...defaultConfig, ...rcFile }, [
     '_',

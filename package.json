@@ -10,7 +10,7 @@
     "url": "https://github.com/kimxogus/icbm/issues/"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=8"
   },
   "preferGlobal": true,
   "author": {
@@ -27,10 +27,7 @@
     "pretest": "yarn lint",
     "test": "cross-env NODE_ENV=test babel-node scripts/test",
     "prebuild": "npm run lint && babel-node scripts/clearBuild.js",
-    "build": "npm run build:prod",
-    "build:prod": "cross-env NODE_EMV=production babel src -d build --ignore **/__tests__/*",
-    "prepublish": "yarn build",
-    "precommit": "lint-staged"
+    "build:prod": "rimraf build/* && cross-env NODE_EMV=production babel src -d build --ignore **/__tests__/*"
   },
   "lint-staged": {
     "*.{js}": [
@@ -57,13 +54,14 @@
     "eslint-plugin-flowtype": "^2.34.0",
     "eslint-plugin-prettier": "^2.1.1",
     "flow-bin": "^0.61.0",
-    "husky": "^0.14.3",
+    "husky": "^1.1.2",
     "jest": "^21.0.0",
-    "lint-staged": "^6.0.0",
+    "lint-staged": "^7.3.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.4.4",
     "prettier-eslint": "^8.4.0",
-    "remove": "^0.1.5"
+    "remove": "^0.1.5",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
@@ -91,5 +89,10 @@
     "testPathIgnorePatterns": [
       "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
