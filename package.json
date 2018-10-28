@@ -26,8 +26,8 @@
     "lint": "eslint .",
     "pretest": "yarn lint",
     "test": "cross-env NODE_ENV=test babel-node scripts/test",
-    "prebuild": "npm run lint && babel-node scripts/clearBuild.js",
-    "build:prod": "rimraf build/* && cross-env NODE_EMV=production babel src -d build --ignore **/__tests__/*"
+    "prebuild": "npm run lint && rimraf build/*",
+    "build:prod": "cross-env NODE_EMV=production babel src -d build --ignore **/__tests__/*"
   },
   "lint-staged": {
     "*.{js}": [
