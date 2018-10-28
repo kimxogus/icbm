@@ -1,5 +1,5 @@
 // @flow
-import Github from 'github';
+import Github from '@octokit/rest';
 import { getConfig } from '../config';
 import getEnvVar from 'get-env-var';
 import version from '../version';
