@@ -1,22 +1,21 @@
 // @flow
 import fs from 'fs';
-import { copySync, removeSync, ensureSymlinkSync } from 'fs-extra';
+import * as fsExtra from 'fs-extra';
 import path from 'path';
 import stringify from 'json-stable-stringify';
 
 import { appDir } from '../paths';
 import { getConfig } from '../config';
 import * as gist from '../github/gist';
-import version from '../version';
 
 type response = Promise<Array<{ name: string, path: string }>>;
 
-const linkFiles = (): response => {
+const linkFiles = async (): response => {
   const config = getConfig();
-  return Promise.resolve(
+  return await Promise.all(
     Object.keys(config)
       .filter(key => key.startsWith('path.'))
-      .map(key => {
+      .map(async key => {
         const file = key.substr(5);
         const filePath = config[key];
 
@@ -24,11 +23,13 @@ const linkFiles = (): response => {
           fs.existsSync(filePath) &&
           !fs.statSync(filePath).isSymbolicLink()
         ) {
-          copySync(filePath, `${filePath}.bak`);
-          removeSync(filePath);
+          fsExtra.copyFileSync(filePath, `${filePath}.bak`, {
+            overwrite: true,
+          });
+          fsExtra.removeSync(filePath);
         }
 
-        ensureSymlinkSync(path.join(appDir, file), filePath);
+        fsExtra.ensureSymlinkSync(path.join(appDir, file), filePath);
 
         return {
           name: file,
@@ -38,7 +39,7 @@ const linkFiles = (): response => {
   );
 };
 
-export default (): response => {
+export default async (): response => {
   const repoType = getConfig('repository.type');
 
   if (!repoType)
@@ -48,23 +49,24 @@ export default (): response => {
 
   switch (repoType) {
     case 'gist':
-      return gist.get(getConfig('repository.gist')).then(res => {
-        const files = res.data.files;
-        const fileList = Object.keys(files);
-        for (let i = 0, len = fileList.length; i < len; i++) {
-          const file = fileList[i];
-          const content = files[file].content;
-          fs.writeFileSync(
-            path.join(appDir, file),
-            content === 'EMPTY_CONTENT' ? '' : content,
-            {
-              encoding: 'utf8',
-            }
-          );
-        }
+      const res = await gist.get(getConfig('repository.gist'));
+      const files = res.data.files;
+      const fileList = Object.keys(files);
+      for (let i = 0, len = fileList.length; i < len; i++) {
+        const file = fileList[i];
+        const content = files[file].content;
+        fs.writeFileSync(
+          path.join(appDir, file),
+          content === 'EMPTY_CONTENT' ? '' : content,
+          {
+            encoding: 'utf8',
+          }
+        );
+      }
 
-        return linkFiles();
-      });
+      const linkedFiles = await linkFiles();
+
+      return linkedFiles;
     default:
       return Promise.reject({
         message: `${repoType} is not supported yet.`,

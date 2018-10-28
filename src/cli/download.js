@@ -36,12 +36,12 @@ export default () => {
   });
 };
 
-const executeDownload = () =>
-  download().then(downloadedFiles => {
-    print.info(`Downloaded files successfully.`);
-    print.info(
-      downloadedFiles
-        .map(({ name, path }) => `${leftPad(name, 15)} > ${path}`)
-        .join('\n')
-    );
-  });
+const executeDownload = async () => {
+  const downloadedFiles = await download();
+  print.info(`Downloaded files successfully.`);
+  print.info(
+    downloadedFiles
+      .map(({ name, path }) => `${leftPad(name, 15)} > ${path}`)
+      .join('\n')
+  );
+};

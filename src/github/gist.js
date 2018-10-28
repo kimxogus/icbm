@@ -19,14 +19,14 @@ export const get = (id: ?string): Promise<object> => {
 
   if (!id || !id.length) return Promise.reject({ message: 'ID is empty' });
 
-  return github.gists.get({ id });
+  return github.gists.get({ gist_id: id });
 };
 
 export const edit = (files: object): Promise<object> => {
   authenticate();
 
   return github.gists.edit({
-    id: getConfig('repository.gist'),
+    gist_id: getConfig('repository.gist'),
     files,
   });
 };
