@@ -1,10 +1,16 @@
 {
   "presets": [
-    "es2015",
-    "flow",
-    "stage-0"
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "8"
+        }
+      }
+    ],
+    "@babel/preset-flow"
   ],
   "plugins": [
-    "transform-runtime"
+    "@babel/plugin-transform-runtime"
   ]
 }
