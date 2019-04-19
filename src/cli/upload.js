@@ -16,11 +16,10 @@ export default () => {
 
   const getGistAndUpload =
     gist && gist.length
-      ? get(gist).then(
-          r =>
-            r && r.data && r.data.files
-              ? executeUpload()
-              : Promise.reject({ code: 404 })
+      ? get(gist).then(r =>
+          r && r.data && r.data.files
+            ? executeUpload()
+            : Promise.reject({ code: 404 })
         )
       : Promise.reject({ code: 404 });
 
