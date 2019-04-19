@@ -1,0 +1,11 @@
+{
+  "include": ["src"],
+  "exclude": ["**/__tests__/*"],
+  "compilerOptions": {
+    "sourceRoot": "./src",
+    "outDir": "./lib",
+    "baseUrl": "./src",
+    "target": "es5",
+    "lib": ["es6", "es2015"]
+  }
+}

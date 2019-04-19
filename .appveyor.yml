@@ -3,18 +3,20 @@ environment:
     - nodejs_version: "8"
     - nodejs_version: "9"
     - nodejs_version: "10"
+    - nodejs_version: "11"
 
 cache:
- - "%LOCALAPPDATA%\\Yarn"
+  - node_modules
+  - '%APPDATA%\npm-cache'
 
 platform:
   - x64
 
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
-  - yarn
+  - npm install
 
 test_script:
-  - yarn test
+  - npm run test
 
 build: off

@@ -1,26 +1,22 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "sourceType": "module",
-    "allowImportExportEverywhere": false
+    "project": "./tsconfig.json"
   },
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "plugins": [
-    "flowtype",
-    "prettier"
+    "prettier",
+    "@typescript-eslint"
   ],
   "extends": [
-    "plugin:flowtype/recommended",
     "prettier",
-    "prettier/flowtype"
+    "plugin:@typescript-eslint/recommended"
   ],
   "settings": {
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": false
-    }
   },
   "rules": {
     "no-shadow": "error",
@@ -28,6 +24,7 @@
       "error",
       "smart"
     ],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "@typescript-eslint/indent": "off"
   }
 }
