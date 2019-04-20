@@ -5,4 +5,4 @@ const packageJson = fs.readJSONSync(
   path.resolve(__dirname, '..', 'package.json')
 );
 
-export default packageJson.version;
+export default packageJson.version as string;
