@@ -28,7 +28,8 @@
     "pretest": "rimraf testHome",
     "test": "ts-node scripts/test",
     "prebuild": "npm run lint && npm run test && rimraf lib/*",
-    "build:prod": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "lint-staged": {
     "*.{ts,js}": [

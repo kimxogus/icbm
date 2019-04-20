@@ -4,6 +4,7 @@ node_modules
 .vscode
 /testHome
 /.env*
+/src
 **/__tests__/
 .travis.yml
 .appveyor.yml
