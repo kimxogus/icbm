@@ -4,9 +4,7 @@ import version from '../version';
 
 const github = new Octokit({
   debug: process.env.NODE_ENV !== 'production',
-  headers: {
-    'user-agent': `icbm v${version}, node v${process.versions.node}`,
-  },
+  userAgent: `icbm v${version}, node v${process.versions.node}`,
 });
 
 export default github;
