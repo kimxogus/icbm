@@ -6,7 +6,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/icbm.svg)](https://npmjs.org/package/icbm)
 
 [![Build Status](https://travis-ci.org/kimxogus/icbm.svg?branch=master)](https://travis-ci.org/kimxogus/icbm)
-[![Build status](https://ci.appveyor.com/api/projects/status/1m7wtxfif2b1thh8/branch/master?svg=true)](https://ci.appveyor.com/project/kimxogus/icbm/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/5h0p627mhgb4pdxo/branch/master?svg=true)](https://ci.appveyor.com/project/kimxogus/icbm/branch/master)
 
 [![Dependencies Status](https://david-dm.org/kimxogus/icbm/status.svg)](https://david-dm.org/kimxogus/icbm)
 [![DevDependencies Status](https://david-dm.org/kimxogus/icbm/dev-status.svg)](https://david-dm.org/kimxogus/icbm?type=dev)
@@ -93,7 +93,7 @@ icbm config get
 
 ## TODO
 
-- resolve paths in different os and env(like $HOME)
+- resolve paths in different os and env(like \$HOME)
 - multiple repositories to backup configurations
 - node api
 - rewrite in golang(for standalone app)
