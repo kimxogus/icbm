@@ -14,7 +14,7 @@ jobs:
         node-version: [12.x]
     steps:
       - uses: actions/checkout@v2
-      - name: Lint with node ${{ matrix.node-version }}
+      - name: Setup node ${{ matrix.node-version }} in ${{ runner.OS }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
@@ -31,13 +31,14 @@ jobs:
       - run: npm run lint
   test:
     name: Test
-    runs-on: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [macos-latest, ubuntu-latest, ubuntu-latest]
         node-version: [10.x, 12.x, 14.x]
     steps:
       - uses: actions/checkout@v2
-      - name: Test with node ${{ matrix.node-version }}
+      - name: Setup node ${{ matrix.node-version }} in ${{ runner.OS }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
