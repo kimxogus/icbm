@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x]
     steps:
       - uses: actions/checkout@v2
       - name: Lint with node ${{ matrix.node-version }}
@@ -31,7 +31,7 @@ jobs:
       - run: npm run lint
   test:
     name: Test
-    runs-on: ubuntu-latest
+    runs-on: [windows-latest, ubuntu-latest, macos-latest]
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
