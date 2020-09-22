@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
+import * as jest from 'jest';
 
-process.env.NODE_ENV = 'test';
 process.env.HOME = path.join(process.cwd(), 'testHome');
 
 if (fs.existsSync('.env.test'))
@@ -16,5 +16,4 @@ if (process.env.CI) {
   argv.push('--runInBand');
 }
 
-/* eslint-disable-next-line @typescript-eslint/no-var-requires */
-require('jest').run(argv);
+jest.run(argv);
