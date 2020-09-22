@@ -12,9 +12,9 @@
   "extends": ["prettier", "plugin:@typescript-eslint/recommended"],
   "settings": {},
   "rules": {
-    "no-shadow": "error",
     "eqeqeq": ["error", "smart"],
     "prettier/prettier": "error",
+    "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/indent": "off"
   }
 }

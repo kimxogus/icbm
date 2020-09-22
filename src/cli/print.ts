@@ -5,16 +5,18 @@ function info(...args) {
   console.log(...args);
 }
 
-function printConfigPair(config: object | string, key?: string): void {
+export type ConfigKey = string;
+
+function printConfigPair(config: ConfigKey, key?: string): void {
   info(`${key} = ${get(config, key)}`);
 }
 
-function printConfigObject(config: object | string): void {
+function printConfigObject(config: ConfigKey): void {
   Object.keys(config).forEach(k => printConfigPair(config, k));
 }
 
 const print = {
-  config: (config: object | string, key?: string) =>
+  config: (config: ConfigKey, key?: string) =>
     isNil(key) ? printConfigObject(config) : printConfigPair(config, key),
   info,
   warn: (...args) => console.log(...args.map(a => chalk.bold.yellow(a))),

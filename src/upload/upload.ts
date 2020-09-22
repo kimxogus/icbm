@@ -47,7 +47,7 @@ export default (): Promise<{ uploaded: string[]; deleted: string[] }> => {
 
   switch (repoType) {
     case 'gist':
-      const files: object = getUploadingFiles();
+      const files = getUploadingFiles();
 
       return gist.get(getConfig('repository.gist') as string).then(res => {
         const deleted = Object.keys(res.data.files).filter(f => !has(files, f));

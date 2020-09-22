@@ -7,7 +7,7 @@ export interface CreateOption {
   public?: boolean;
 }
 
-export const create = (option?: CreateOption): Promise<object> => {
+export const create = (option?: CreateOption): Promise<any> => {
   authenticate();
 
   return github.gists
@@ -26,17 +26,15 @@ export const get = (
 
   if (!id || !id.length) return Promise.reject({ message: 'ID is empty' });
 
-  /* eslint-disable-next-line @typescript-eslint/camelcase */
   return github.gists.get({ gist_id: id });
 };
 
 export const edit = (
-  files: object
+  files: any
 ): Promise<Octokit.Response<Octokit.GistsUpdateResponse>> => {
   authenticate();
 
   return github.gists.update({
-    /* eslint-disable-next-line @typescript-eslint/camelcase */
     gist_id: String(getConfig('repository.gist')),
     files,
   });
