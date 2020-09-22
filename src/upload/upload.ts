@@ -1,4 +1,4 @@
-import { GistsCreateParamsFiles } from '@octokit/rest';
+import { Octokit } from '@octokit/rest';
 import * as fs from 'fs';
 import * as path from 'path';
 import { has, without } from 'lodash';
@@ -10,7 +10,7 @@ import * as gist from '../github/gist';
 import version from '../version';
 
 export interface Files {
-  [file: string]: GistsCreateParamsFiles;
+  [file: string]: Octokit.GistsCreateParamsFiles;
 }
 
 export function getUploadingFiles(): Files {

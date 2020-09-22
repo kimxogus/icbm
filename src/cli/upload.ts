@@ -1,6 +1,6 @@
 import co from 'co';
 import prompt from 'co-prompt';
-import chalk from 'chalk';
+import chalk = require('chalk');
 
 import { getConfig, setConfig } from '../config';
 import { upload, getUploadingFiles } from '../upload';

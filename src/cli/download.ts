@@ -1,7 +1,7 @@
 import * as leftPad from 'left-pad';
 import co from 'co';
 import prompt from 'co-prompt';
-import chalk from 'chalk';
+import chalk = require('chalk');
 
 import { get } from '../github/gist';
 import { download } from '../download';
