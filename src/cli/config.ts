@@ -6,9 +6,9 @@ export default (type: string, key?: string, value?: string | number) => {
   switch (type) {
     case 'get':
       if (isNil(key)) {
-        print.config(config.getConfig() as object);
+        print.config(config.getConfig());
       } else if (config.keys.validate(key)) {
-        print.config(config.getConfig() as object, key);
+        print.config(config.getConfig(), key);
       } else {
         print.error('Input error', `Invalid key '${key}'`);
       }

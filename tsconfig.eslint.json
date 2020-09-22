@@ -1,0 +1,12 @@
+{
+  "include": ["src", "bin/*.js", "scripts/*.ts"],
+  "compilerOptions": {
+    "sourceRoot": "./src",
+    "sourceMap": true,
+    "outDir": "./lib",
+    "baseUrl": "./src",
+    "target": "es5",
+    "declaration": true,
+    "lib": ["es6", "es2015"]
+  }
+}

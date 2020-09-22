@@ -13,7 +13,7 @@ const executeUpload = () =>
       err =>
         new Promise((resolve, reject) => {
           if (err && err.code === 401) {
-            co(function*() {
+            co(function* () {
               print.error('Invalid token', 'Github Token is not valid.');
               const githubToken = yield prompt(chalk.green('Github Token: '));
               setConfig('repository.githubToken', githubToken);
@@ -53,7 +53,7 @@ export default () => {
   getGistAndUpload.catch(e => {
     // Gist id is not set or invalid gist id
     if (e && e.code === 404) {
-      co(function*() {
+      co(function* () {
         print.error('Invalid gist', 'Gist id is not set or invalid.');
         const gistId = yield prompt(
           chalk.green('Gist id(Empty to create a new gist): ')

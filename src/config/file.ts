@@ -15,10 +15,7 @@ import defaultConfig from './defaultConfig';
 
 export const getConfigs = (...keys: string[]): object => {
   const rcFile: object =
-    os
-      .type()
-      .toLowerCase()
-      .indexOf('windows') !== -1
+    os.type().toLowerCase().indexOf('windows') !== -1
       ? fs.existsSync(configFile)
         ? readJsonSync(configFile)
         : {}

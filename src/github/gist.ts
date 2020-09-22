@@ -1,4 +1,4 @@
-import * as Octokit from '@octokit/rest';
+import { Octokit } from '@octokit/rest';
 import github, { authenticate } from './github';
 import { getConfig, setConfig } from '../config';
 
