@@ -14,7 +14,7 @@
 
 ## Prerequisites
 
-- node.js `>= 8`
+- node.js `>= 10`
 
 ## Installation
 
