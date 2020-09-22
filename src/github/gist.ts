@@ -1,14 +1,27 @@
-import * as Octokit from '@octokit/rest';
+import {
+  OctokitResponse,
+  GistsGetResponseData,
+  GistsUpdateResponseData,
+} from '@octokit/types';
 import github, { authenticate } from './github';
 import { getConfig, setConfig } from '../config';
 
+export interface File {
+  filename: string;
+  content: string;
+}
+
+export interface Files {
+  [file: string]: File;
+}
+
 export interface CreateOption {
-  files: Octokit.GistsCreateParamsFiles;
+  files: Files;
   public?: boolean;
 }
 
-export const create = (option?: CreateOption): Promise<object> => {
-  authenticate();
+export async function create(option?: CreateOption): Promise<any> {
+  await authenticate();
 
   return github.gists
     .create({
@@ -17,27 +30,25 @@ export const create = (option?: CreateOption): Promise<object> => {
       ...option,
     })
     .then(res => setConfig('repository.gist', res.data.id));
-};
+}
 
-export const get = (
+export async function get(
   id?: string
-): Promise<Octokit.Response<Octokit.GistsGetResponse>> => {
+): Promise<OctokitResponse<GistsGetResponseData>> {
   id = id || String(getConfig('repository.gist'));
 
   if (!id || !id.length) return Promise.reject({ message: 'ID is empty' });
 
-  /* eslint-disable-next-line @typescript-eslint/camelcase */
   return github.gists.get({ gist_id: id });
-};
+}
 
-export const edit = (
-  files: object
-): Promise<Octokit.Response<Octokit.GistsUpdateResponse>> => {
-  authenticate();
+export async function edit(
+  files: Files
+): Promise<OctokitResponse<GistsUpdateResponseData>> {
+  await authenticate();
 
   return github.gists.update({
-    /* eslint-disable-next-line @typescript-eslint/camelcase */
     gist_id: String(getConfig('repository.gist')),
     files,
   });
-};
+}

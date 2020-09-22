@@ -1,4 +1,3 @@
-import { GistsCreateParamsFiles } from '@octokit/rest';
 import * as fs from 'fs';
 import * as path from 'path';
 import { has, without } from 'lodash';
@@ -6,12 +5,8 @@ import stringify = require('json-stable-stringify');
 
 import { appDir } from '../paths';
 import { getConfig } from '../config';
-import * as gist from '../github/gist';
+import { get as gistGet, edit as gistEdit, Files } from '../github/gist';
 import version from '../version';
-
-export interface Files {
-  [file: string]: GistsCreateParamsFiles;
-}
 
 export function getUploadingFiles(): Files {
   const files = fs.readdirSync(appDir).reduce((filesObject, file) => {
@@ -28,6 +23,7 @@ export function getUploadingFiles(): Files {
   }, {}) as Files;
 
   files.syncInfo = {
+    filename: 'syncInfo',
     content:
       stringify({
         version,
@@ -47,12 +43,12 @@ export default (): Promise<{ uploaded: string[]; deleted: string[] }> => {
 
   switch (repoType) {
     case 'gist':
-      const files: object = getUploadingFiles();
+      const files = getUploadingFiles();
 
-      return gist.get(getConfig('repository.gist') as string).then(res => {
+      return gistGet(getConfig('repository.gist') as string).then(res => {
         const deleted = Object.keys(res.data.files).filter(f => !has(files, f));
         deleted.forEach(f => (files[f] = null));
-        return gist.edit(files).then(() =>
+        return gistEdit(files).then(() =>
           Promise.resolve({
             uploaded: without(Object.keys(files), ...deleted),
             deleted,

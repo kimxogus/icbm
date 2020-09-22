@@ -13,17 +13,14 @@ import { appName, appDir, configFile } from '../paths';
 
 import defaultConfig from './defaultConfig';
 
-export const getConfigs = (...keys: string[]): object => {
-  const rcFile: object =
-    os
-      .type()
-      .toLowerCase()
-      .indexOf('windows') !== -1
+export const getConfigs = (...keys: string[]): any => {
+  const rcFile: any =
+    os.type().toLowerCase().indexOf('windows') !== -1
       ? fs.existsSync(configFile)
         ? readJsonSync(configFile)
         : {}
       : rc(appName);
-  const config: object = omit({ ...defaultConfig, ...rcFile }, [
+  const config: any = omit({ ...defaultConfig, ...rcFile }, [
     '_',
     'config',
     'configs',
@@ -34,7 +31,7 @@ export const getConfigs = (...keys: string[]): object => {
   return keys.length ? pick(config, keys) : config;
 };
 
-export const getConfig = (key?: string): string | object => {
+export const getConfig = (key?: string): string | any => {
   const config = getConfigs(key);
   return key ? config[key] : config;
 };
@@ -42,10 +39,10 @@ export const getConfig = (key?: string): string | object => {
 export const setConfig = (
   key: string,
   value: string | number | boolean
-): object => {
+): any => {
   mkdirpSync(appDir);
 
-  const existingConfig: object = fs.existsSync(configFile)
+  const existingConfig: any = fs.existsSync(configFile)
     ? readJsonSync(configFile)
     : {};
 
@@ -64,7 +61,7 @@ export const setConfig = (
   if (!validate(key, value))
     throw new Error(`Invalid key value pair { '${key}' : ${value} }`);
 
-  const newConfig: object = {
+  const newConfig: { [k: string]: any } = {
     ...existingConfig,
     ...{ [key]: value },
   };
@@ -74,10 +71,10 @@ export const setConfig = (
   return newConfig;
 };
 
-export const removeConfig = (key: string): object => {
+export const removeConfig = (key: string): any => {
   mkdirpSync(appDir);
 
-  const existingConfig: object = fs.existsSync(configFile)
+  const existingConfig: any = fs.existsSync(configFile)
     ? readJsonSync(configFile)
     : {};
 

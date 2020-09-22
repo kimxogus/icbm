@@ -1,15 +1,17 @@
-import * as Octokit from '@octokit/rest';
+import { Octokit } from '@octokit/rest';
+import { createTokenAuth } from '@octokit/auth-token';
 import { getConfig } from '../config';
 import version from '../version';
 
 const github = new Octokit({
+  auth: getConfig('repository.githubToken'),
   debug: process.env.NODE_ENV !== 'production',
   userAgent: `icbm v${version}, node v${process.versions.node}`,
 });
 
 export default github;
 
-export const authenticate = (): Promise<void> => {
+export async function authenticate(): Promise<void> {
   const token = getConfig('repository.githubToken');
 
   if (!token)
@@ -17,7 +19,7 @@ export const authenticate = (): Promise<void> => {
       `Set github token using 'icbm config set repository.githubToken <token>'`
     );
 
-  const auth: Octokit.AuthOAuthToken = { type: 'oauth', token: String(token) };
-  github.authenticate(auth);
-  return Promise.resolve();
-};
+  const authResponse = await createTokenAuth(String(token));
+
+  await github.auth(authResponse);
+}

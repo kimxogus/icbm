@@ -1,30 +1,20 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.eslint.json"
   },
   "env": {
     "es6": true,
     "node": true,
     "jest": true
   },
-  "plugins": [
-    "prettier",
-    "@typescript-eslint"
-  ],
-  "extends": [
-    "prettier",
-    "plugin:@typescript-eslint/recommended"
-  ],
-  "settings": {
-  },
+  "plugins": ["prettier", "@typescript-eslint"],
+  "extends": ["prettier", "plugin:@typescript-eslint/recommended"],
+  "settings": {},
   "rules": {
-    "no-shadow": "error",
-    "eqeqeq": [
-      "error",
-      "smart"
-    ],
+    "eqeqeq": ["error", "smart"],
     "prettier/prettier": "error",
+    "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/indent": "off"
   }
 }
