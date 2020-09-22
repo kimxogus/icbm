@@ -19,5 +19,7 @@ export async function authenticate(): Promise<void> {
       `Set github token using 'icbm config set repository.githubToken <token>'`
     );
 
-  await createTokenAuth(String(token));
+  const authResponse = await createTokenAuth(String(token));
+
+  await github.auth(authResponse);
 }
