@@ -1,17 +1,13 @@
-name: Test
+name: ESLint check
 on:
   push:
-    branches:
-      - master
-      - develop
-  pull_request:
 jobs:
-  test:
+  lint:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
-        node-version: [10.x, 12.x, 14.x]
+        os: [ubuntu-latest]
+        node-version: [12.x]
     steps:
       - uses: actions/checkout@v2
       - name: Setup node ${{ matrix.node-version }} in ${{ runner.OS }}
@@ -22,9 +18,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: ${{ runner.OS }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.OS }}-${{ matrix.node-version }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.OS }}-node-${{ matrix.node-version }}-
+            ${{ runner.OS }}-${{ matrix.node-version }}-node-
+            ${{ runner.OS }}-${{ matrix.node-version }}-
             ${{ runner.OS }}-
       - run: npm install
-      - run: npm run test
+      - run: npm run lint
