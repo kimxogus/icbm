@@ -1,15 +1,26 @@
-import { Octokit } from '@octokit/rest';
-import github, { authenticate } from './github';
+import {
+  OctokitResponse,
+  GistsGetResponseData,
+  GistsUpdateResponseData,
+} from '@octokit/types';
+import github from './github';
 import { getConfig, setConfig } from '../config';
 
+export interface File {
+  filename: string;
+  content: string;
+}
+
+export interface Files {
+  [file: string]: File;
+}
+
 export interface CreateOption {
-  files: Octokit.GistsCreateParamsFiles;
+  files: Files;
   public?: boolean;
 }
 
 export const create = (option?: CreateOption): Promise<any> => {
-  authenticate();
-
   return github.gists
     .create({
       description: 'Gist for icbm',
@@ -21,7 +32,7 @@ export const create = (option?: CreateOption): Promise<any> => {
 
 export const get = (
   id?: string
-): Promise<Octokit.Response<Octokit.GistsGetResponse>> => {
+): Promise<OctokitResponse<GistsGetResponseData>> => {
   id = id || String(getConfig('repository.gist'));
 
   if (!id || !id.length) return Promise.reject({ message: 'ID is empty' });
@@ -30,10 +41,8 @@ export const get = (
 };
 
 export const edit = (
-  files: any
-): Promise<Octokit.Response<Octokit.GistsUpdateResponse>> => {
-  authenticate();
-
+  files: Files
+): Promise<OctokitResponse<GistsUpdateResponseData>> => {
   return github.gists.update({
     gist_id: String(getConfig('repository.gist')),
     files,
